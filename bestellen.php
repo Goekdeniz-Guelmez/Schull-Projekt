@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             displayWarenkorb(); // Zeige den Warenkorb mit der Bestellung an
             $_SESSION['warenkorb'] = array();
             $_SESSION['gesamtsumme'] = 0;
-            echo "<script>alert('Bestellung erfolgreich aufgegeben!');</script>";
+            echo "<script>alert('Bestellung erfolgreich aufgegeben!'); window.location.reload();</script>";
         } catch (Exception $e) {
             $db->rollback();
             echo "<script>alert('Fehler beim Bestellen: " . $e->getMessage() . "');</script>";
