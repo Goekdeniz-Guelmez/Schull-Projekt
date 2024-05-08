@@ -1,82 +1,18 @@
-* {
-    box-sizing: border-box;
-}
-
 :root {
---background-color: #ffffff; /* White background for light mode */
---text-color: #000000; /* Black text color for light mode */
+    --background-color: #F8F8F8;
+    --text-color: #0f0f0f;
 }
 
 /* Dark mode */
 @media (prefers-color-scheme: dark) {
     :root {
-        --background-color: #121212; /* Darker shade for background in dark mode */
-        --text-color: #ffffff; /* White text color for dark mode */
+        --background-color: #0f0f0f;
+        --text-color: #F8F8F8;
     }
 }
 
-@font-face {
-    font-family: 'DharmaGothicE-Bold';
-    font-display: fallback;
-    src: url('//lemkus.com/cdn/shop/t/35/assets/DharmaGothicE-Bold.eot?v=105584538646924330131701858364') format('embedded-opentype'), url('//lemkus.com/cdn/shop/t/35/assets/DharmaGothicE-Bold.ttf?v=29484935812956707501701858364') format('truetype'), url('//lemkus.com/cdn/shop/t/35/assets/DharmaGothicE-Bold.woff?v=52718673771587622141701858364') format('woff'), url('//lemkus.com/cdn/shop/t/35/assets/DharmaGothicE-Bold.woff2?v=103998759600460648101701858364') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'DharmaGothicE-ExBold';
-    font-display: fallback;
-    src: url('//lemkus.com/cdn/shop/t/35/assets/DharmaGothicE-ExBold.eot?v=69300282033782092261701858364') format('embedded-opentype'), url('//lemkus.com/cdn/shop/t/35/assets/DharmaGothicE-ExBold.ttf?v=108149970651494675101701858364') format('truetype'), url('//lemkus.com/cdn/shop/t/35/assets/DharmaGothicE-ExBold.woff?v=33747106544633363801701858364') format('woff'), url('//lemkus.com/cdn/shop/t/35/assets/DharmaGothicE-ExBold.woff2?v=65157820398091021381701858364') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'OpenSans-Bold';
-    font-display: fallback;
-    src: url('//lemkus.com/cdn/shop/t/35/assets/OpenSans-Bold.ttf?v=181646321849810206181701858364') format('truetype'), url('//lemkus.com/cdn/shop/t/35/assets/OpenSans-Bold.woff?v=79402598765279711751701858364') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'OpenSans-Regular';
-    font-display: fallback;
-    src: url('//lemkus.com/cdn/shop/t/35/assets/OpenSans-Regular.ttf?v=165224791540163288561701858364') format('truetype'), url('//lemkus.com/cdn/shop/t/35/assets/OpenSans-Regular.woff?v=144754128307340423701701858364') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'OpenSans-SemiBold';
-    font-display: fallback;
-    src: url('//lemkus.com/cdn/shop/t/35/assets/OpenSans-SemiBold.ttf?v=43658787321035188881701858364') format('truetype'), url('//lemkus.com/cdn/shop/t/35/assets/OpenSans-SemiBold.woff?v=137150458511736482261701858364') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'RecoletaAlt-Medium';
-    font-display: fallback;
-    src: url('//lemkus.com/cdn/shop/t/35/assets/RecoletaAlt-Medium.eot?v=97569520005682444921701858364') format('embedded-opentype'), url('//lemkus.com/cdn/shop/t/35/assets/RecoletaAlt-Medium.ttf?v=142383068600178675451701858364') format('truetype'), url('//lemkus.com/cdn/shop/t/35/assets/RecoletaAlt-Medium.woff?v=118710293476263677171701858364') format('woff'), url('//lemkus.com/cdn/shop/t/35/assets/RecoletaAlt-Medium.woff2?v=65794767592945487481701858364') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'RecoletaAlt-SemiBold';
-    font-display: fallback;
-    src: url('//lemkus.com/cdn/shop/t/35/assets/RecoletaAlt-SemiBold.eot?v=112651859278214331241701858364') format('embedded-opentype'), url('//lemkus.com/cdn/shop/t/35/assets/RecoletaAlt-SemiBold.ttf?v=6404069255798424641701858364') format('truetype'), url('//lemkus.com/cdn/shop/t/35/assets/RecoletaAlt-SemiBold.woff?v=105295679355366121621701858364') format('woff'), url('//lemkus.com/cdn/shop/t/35/assets/RecoletaAlt-SemiBold.woff2?v=65567519222236568751701858364') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'RecoletaAlt-Regular';
-    font-display: fallback;
-    src: url('//lemkus.com/cdn/shop/t/35/assets/RecoletaAlt-Regular.eot?v=147616266748794542021701858364') format('embedded-opentype'), url('//lemkus.com/cdn/shop/t/35/assets/RecoletaAlt-Regular.ttf?v=104271300911001422941701858364') format('truetype'), url('//lemkus.com/cdn/shop/t/35/assets/RecoletaAlt-Regular.woff?v=48547574210624603641701858364') format('woff'), url('//lemkus.com/cdn/shop/t/35/assets/RecoletaAlt-Regular.woff2?v=39421849027312620021701858364') format('woff2');
-    font-weight: normal;
-    font-style: normal;
+* {
+    box-sizing: border-box;
 }
 
 html {
@@ -86,16 +22,22 @@ html {
 body {
     background-color: var(--background-color);
     color: var(--text-color);
-    font-family: 'Titillium Web', sans-serif;
     max-width: 100vw;
+    display: flex; /* Enables Flexbox */
+    justify-content: center; /* Centers content horizontally */
+    align-items: center; /* Centers content vertically */
+    min-height: 100vh; /* Minimum height of 100% of the viewport height */
+    flex-direction: column; /* Stacks flex items vertically */
+    margin: 0; /* Removes default margin */
 }
 
 a {
     text-decoration: none;
-    color: #1ab188;
+    color: #b11a1a;
     -webkit-transition: .5s ease;
     transition: .5s ease;
 }
+
 a:hover {
     color: #179b77;
 }
@@ -103,114 +45,103 @@ a:hover {
 
 h1 {
     text-align: center;
-    color: #ffffff;
     font-weight: 300;
     margin: 0 0 40px;
 }
 
 h2 {
     text-align: center;
-    color: #1ab188;
     font-weight: 1000;
     margin: 0;
 }
 
 span {
-    color: #1ab188;
     font-weight: bold;
 }
 
 p {
     text-align: center;
-    color: #ffffff;
     margin: 0px 0px 50px 0px;
 }
 
 
 
 .navbar {
-font-size: 17px;
+    font-size: 17px;
 }
 
+
+
+
 .container {
-text-align: center;
-padding-left: 10vw;
-padding-right: 10vw;
-max-width: 90vw;
-margin: auto;
-min-width: 70vw;
-margin-left: 50%;
-transform: translateX(-50%);
-border-radius: 20px;
+    text-align: center;
+    padding-left: 10vw;
+    padding-right: 10vw;
+    max-width: 90vw;
+    margin: auto;
+    min-width: 70vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    border-radius: 20px;
 }
 
 .thumbnail {
-background: #e0e5ec; /* Matching the container background */
-box-shadow: 8px 8px 16px #a3b1c6, 
-            -8px -8px 16px #ffffff;
-border-radius: 20px;
-padding: 20px;
-margin-bottom: 20%;
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 20%;
 }
 
 .product-image {
-width: 80%;
-height: 20vw;
-border-radius: 10px;
-margin-top: -6%;
-box-shadow: 4px 4px 8px #a3b1c6, 
-            -4px -4px 8px #ffffff;
-margin-bottom: 15px;
-object-fit: cover;
-transition: all 0.2s ease-in;
+    width: 80%;
+    height: 20vw;
+    border-radius: 10px;
+    margin-top: -6%;
+    box-shadow: 4px 4px 8px #a3b1c6,
+        -4px -4px 8px #ffffff;
+    margin-bottom: 15px;
+    object-fit: cover;
+    transition: all 0.2s ease-in;
 }
 
 .product-image:hover {
-scale: 1.008;
+    scale: 1.008;
 }
 
-.stock-quantity {
-font-size: 14px;
-color: #555; /* Adjust color to fit your design */
-margin-bottom: 15px;
-}
-
-.list-group-item-heading, .list-group-item-text, .lead {
-color: #333; /* Darker text for better readability */
-}
-
-.btn {
-background: #e0e5ec;
-border: none;
-color: #333;
-box-shadow: 4px 4px 8px #a3b1c6, 
-            -4px -4px 8px #ffffff;
-padding: 10px 20px;
-font-size: 16px;
-border-radius: 10px;
-cursor: pointer;
-transition: all 0.4s ease-in-out; /* Smooth transition for all properties */
-}
-
-.btn:hover, .btn:focus {
-background: #cfd9df; /* Slightly darker to simulate depth */
-box-shadow: 2px 2px 4px #a3b1c6, 
-                -6px -6px 16px #ffffff;
-transform: translateY(4px); /* Moves the button down to simulate pressing */
+.list-group-item-heading,
+.list-group-item-text,
+.lead {
+    color: #333;
 }
 
 .row {
-justify-content: center;
+    justify-content: center;
 }
 
 .item {
-margin-top: 20px;
+    margin-top: 20px;
 }
 
 .caption {
-text-align: center;
+    text-align: center;
 }
 
-.badge .glyphicon{
-font-size: 17px;
+.badge .glyphicon {
+    font-size: 17px;
+}
+
+
+
+form {
+    border-radius: 10px;
+    margin: 10px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 20px;
+}
+
+input, label {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
 }

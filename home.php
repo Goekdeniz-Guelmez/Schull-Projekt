@@ -42,7 +42,7 @@ include "dbConfig.php";
     <!-- ------------------------------------ -->
     <!-- Div Sektion -->
     <div class="container">
-        <h1>Produkte</h1>
+        <h1>Unsere Produkte</h1>
         <br>
 
         <div id="products" class="row list-group">
@@ -107,8 +107,12 @@ include "dbConfig.php";
         ?>
 
     </div>
+    
+    <!-- Footer Sektion -->
+    <footer>
+        <p>Develped by Gökdeniz and Ralf. Databank modelling by Andian and Elias, Project Management by Natalie</p>
+    </footer>
 
-    </div>
 </body>
 
 </html>

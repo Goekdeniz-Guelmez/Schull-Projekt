@@ -94,9 +94,10 @@ function displayWarenkorb() {
             <?php } ?>
         };
     </script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Produkt bestellen</h1>
+    <h1>Produkt(e) bestellen</h1>
     <form method="POST">
         <label for="produktId">Produkt ID:</label>
         <input type="number" id="produktId" name="produktId" required><br>
