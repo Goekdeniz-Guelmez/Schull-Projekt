@@ -5,25 +5,33 @@
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $kundennummer = $_POST['kundennummer'];
-        // Überprüfung, ob der Benutzer als Admin eingeloggt ist
-        if ($kundennummer == '0') {
+
+        // Holt die KNr des Benutzers 'admin'
+        $sqlAdmin = "SELECT KNr FROM Kunde WHERE Vorname = 'admin'";
+        $result = $db->query($sqlAdmin);
+        $adminKNr = $result->fetch_assoc()['KNr'];
+
+        // Überprüfung, ob die eingegebene KNr mit der KNr des 'admin' übereinstimmt
+        if ($kundennummer == $adminKNr) {
             $bezeichnung = $db->real_escape_string($_POST['bezeichnung']);
             $beschreibung = $db->real_escape_string($_POST['beschreibung']);
             $preis = $db->real_escape_string($_POST['preis']);
-            $bild = $db->real_escape_string($_POST['bild']);
+            $bildDateiname = $db->real_escape_string($_POST['bild']);
+            $bild = "../bilder/" . $bildDateiname; // Hinzufügen des Pfades vor dem Dateinamen
 
             $sql = "INSERT INTO Artikel (Bezeichnung, Beschreibung, Preis, Bild) VALUES (?, ?, ?, ?)";
             $stmt = $db->prepare($sql);
             $stmt->bind_param("ssds", $bezeichnung, $beschreibung, $preis, $bild);
             if ($stmt->execute()) {
-                echo "<script>alert('Produkt erfolgreich hinzugefügt.');</script>";
+                echo "<script>alert('Produkt erfolgreich hinzugefügt.'); window.location.reload();</script>";
             } else {
-                echo "<script>alert('Fehler beim Hinzufügen des Produkts: " . $stmt->error . "');</script>";
+                echo "<script>alert('Fehler beim Hinzufügen des Produkts: " . $stmt->error . "'); window.location.reload();</script>";
             }
             $stmt->close();
         } else {
             echo "<script>alert('Nur der Administrator kann Produkte hinzufügen.');</script>";
         }
+        $result->free();
     }
 ?>
 

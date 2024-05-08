@@ -61,3 +61,7 @@ values (100, "Smart Speaker", "Der Echo Studio kombiniert High-Fidelity-Klang mi
 (300, "Smart Lock", "Der Wi-Fi Smart Lock ermöglicht die sichere Steuerung Ihrer Tür von überall aus über das Internet. Mit der zugehörigen App können Sie die Tür verriegeln und entriegeln, virtuelle Schlüssel verwalten und Aktivitätsprotokolle überprüfen.", 159.99, "../bilder/lock.jpg"),
 (400, "Smart Lamp", "Die Smart Lamp bietet eine einfache Möglichkeit, Ihre Beleuchtung zu automatisieren und zu steuern. Über die Philips Hue-App können Sie die Lampe ein- und ausschalten, Helligkeit und Farbtemperatur anpassen sowie Zeitpläne festlegen.", 14.99, "../bilder/lamp.jpg"),
 (500, "Smart Thermostat", "Das Smart Thermostat ermöglicht die intelligente Steuerung Ihrer Heizung und Kühlung von überall aus über das Internet. Mit der zugehörigen App können Sie die Temperatur einstellen, Zeitpläne programmieren und Energieverbrauchsberichte anzeigen.", 39.99, "../bilder/thermostat.jpg");
+
+
+INSERT INTO Kunde(KNr, Vorname, Nachname, Email)
+values(0, "admin", "admin", "admin@gmail.com");
