@@ -19,7 +19,7 @@ include "dbConfig.php";
 <!-- Body Sektion -->
 <body>
     <!-- Nav Sektion -->
-    <nav class="navbar navbar-inverse"  style="border-radius: 0px;">
+    <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">E-Shop</a>

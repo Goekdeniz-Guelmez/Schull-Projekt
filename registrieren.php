@@ -68,10 +68,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-    <nav class="navbar navbar-inverse"  style="border-radius: 0px;">
+    <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">E-Shop</a>
+                <a class="navbar-brand" href="index.html">E-Shop</a>
             </div>
 
             <ul class="nav navbar-nav">

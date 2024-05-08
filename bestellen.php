@@ -97,7 +97,7 @@ function displayWarenkorb() {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="navbar navbar-inverse"  style="border-radius: 0px;">
+    <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">E-Shop</a>
@@ -118,7 +118,7 @@ function displayWarenkorb() {
     </nav>
 
     <h1>Produkt(e) bestellen</h1>
-    
+
     <form method="POST">
         <label for="produktId">Produkt ID:</label>
         <input type="number" id="produktId" name="produktId" required><br>
