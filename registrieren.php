@@ -68,7 +68,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
+    <nav class="navbar navbar-inverse"  style="border-radius: 0px;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">E-Shop</a>
+            </div>
+
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="home.php">Home (Produkte)</a>
+                </li>
+                <li>
+                    <a href="registrieren.php">Registrierung</a>
+                </li>
+                <li>
+                    <a href="bestellen.php">bestellungs formular</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
     <h1>Kundenregistrierung</h1>
+
     <form method="POST">
         <label for="vorname">Vorname:</label>
         <input type="text" id="vorname" name="vorname" required><br>
@@ -101,5 +122,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         alert('<?php echo $errorMessage; ?>');
     </script>
     <?php endif; ?>
+
+    <footer>
+        <p>Develped by Gökdeniz and Ralf. Databank modelling by Andian and Elias, Project Management by Natalie</p>
+    </footer>
 </body>
 </html>

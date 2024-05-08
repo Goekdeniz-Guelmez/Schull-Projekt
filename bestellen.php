@@ -97,7 +97,28 @@ function displayWarenkorb() {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <nav class="navbar navbar-inverse"  style="border-radius: 0px;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">E-Shop</a>
+            </div>
+
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="home.php">Home (Produkte)</a>
+                </li>
+                <li>
+                    <a href="registrieren.php">Registrierung</a>
+                </li>
+                <li>
+                    <a href="bestellen.php">bestellungs formular</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
     <h1>Produkt(e) bestellen</h1>
+    
     <form method="POST">
         <label for="produktId">Produkt ID:</label>
         <input type="number" id="produktId" name="produktId" required><br>
@@ -115,5 +136,9 @@ function displayWarenkorb() {
     </form>
 
     <?php displayWarenkorb(); ?>
+
+    <footer>
+        <p>Develped by Gökdeniz and Ralf. Databank modelling by Andian and Elias, Project Management by Natalie</p>
+    </footer>
 </body>
 </html>
