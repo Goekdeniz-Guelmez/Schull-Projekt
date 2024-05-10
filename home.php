@@ -110,7 +110,7 @@ include "dbConfig.php";
     
     <!-- Footer Sektion -->
     <footer>
-        <p>Develped by Gökdeniz and Ralf. Databank modelling by Andian and Elias, Project Management by Natalie</p>
+        <p>Develped by Gökdeniz and Ralf. Databank modelling by Adrian and Elias, Project Management by Natalie</p>
     </footer>
 
 </body>

@@ -104,13 +104,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bezeichnung'])) {
         </div>
     </nav>
 
-    <h1>Produktmanagement</h1>
-    <form method="post" action="">
+    <h2>Produkt hinzufügen</h2>
+
+    <form method="post">
         <label for="kundennummer">Kundennummer:</label><br>
         <input type="number" id="kundennummer" name="kundennummer" required><br>
-
-        <div class="line"></div>
-        <h2>Produkt hinzufügen</h2>
         <label for="bezeichnung">Bezeichnung:</label><br>
         <input type="text" id="bezeichnung" name="bezeichnung" required><br>
         <label for="beschreibung">Beschreibung:</label><br>
@@ -119,17 +117,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bezeichnung'])) {
         <input type="number" step="0.01" id="preis" name="preis" required><br>
         <label for="bild">Bild URL:</label><br>
         <input type="text" id="bild" name="bild" required><br>
-        <input type="submit" value="Produkt hinzufügen"><br>
+        <input type="submit" value="Produkt hinzufügen">
+    </form>
 
-        <div class="line"></div>
-        <h2>Produkt löschen</h2>
+    <br>
+    <br>
+
+    <h2>Produkt löschen</h2>
+    <form method="POST">
+        <label for="kundennummer">Kundennummer:</label><br>
+        <input type="number" id="kundennummer" name="kundennummer" required><br>
         <label for="product_id">Produkt ID:</label>
         <input type="number" id="product_id" name="product_id" required><br>
         <input type="submit" name="delete_product" value="DELETE">
     </form>
 
     <footer>
-        <p>Developed by Gökdeniz and Ralf. Database modelling by Adrian and Elias, Project Management by Natalie</p>
+        <p>Develped by Gökdeniz and Ralf. Databank modelling by Adrian and Elias, Project Management by Natalie</p>
     </footer>
 
 </body>
