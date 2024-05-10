@@ -2,36 +2,53 @@
 session_start();
 include "dbConfig.php";
 
+// Fetch the admin customer number only once per session if not already fetched
+if (!isset($_SESSION['adminKNr'])) {
+    $sqlAdmin = "SELECT KNr FROM Kunde WHERE Vorname = 'admin'";
+    $result = $db->query($sqlAdmin);
+    if ($result) {
+        $adminKNr = $result->fetch_assoc()['KNr'];
+        $_SESSION['adminKNr'] = $adminKNr; // Store admin KNr in session for later use
+    } else {
+        echo "<script>alert('Administratorzugriff konnte nicht verifiziert werden.');</script>";
+        exit; // Stop execution if admin KNr cannot be fetched
+    }
+} else {
+    $adminKNr = $_SESSION['adminKNr'];
+}
+
 // Handle product deletion
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_product'])) {
+    $kundennummer = $_POST['kundennummer'];
     $product_id = $_POST['product_id'];
 
-    $db->autocommit(FALSE);
+    if ($kundennummer == $adminKNr) {
+        $db->autocommit(FALSE);
 
-    try {
-        $sqlDeleteProduct = "DELETE FROM Artikel WHERE ANr = ?";
-        $stmtDeleteProduct = $db->prepare($sqlDeleteProduct);
-        $stmtDeleteProduct->bind_param("i", $product_id);
-        $stmtDeleteProduct->execute();
+        try {
+            $sqlDeleteProduct = "DELETE FROM Artikel WHERE ANr = ?";
+            $stmtDeleteProduct = $db->prepare($sqlDeleteProduct);
+            $stmtDeleteProduct->bind_param("i", $product_id);
+            $stmtDeleteProduct->execute();
 
-        if ($stmtDeleteProduct->affected_rows > 0) {
-            $db->commit();
-            echo "<script>alert('Produkt erfolgreich gelöscht.'); window.location.reload();</script>";
-        } else {
-            throw new Exception("Produkt nicht gefunden oder bereits gelöscht.");
+            if ($stmtDeleteProduct->affected_rows > 0) {
+                $db->commit();
+                echo "<script>alert('Produkt erfolgreich gelöscht.'); window.location.reload();</script>";
+            } else {
+                throw new Exception("Produkt nicht gefunden oder bereits gelöscht.");
+            }
+        } catch (Exception $e) {
+            $db->rollback();
+            echo "<script>alert('Fehler beim Löschen des Produkts: " . $e->getMessage() . "'); window.location.reload();</script>";
         }
-    } catch (Exception $e) {
-        $db->rollback();
-        echo "<script>alert('Fehler beim Löschen des Produkts: " . $e->getMessage() . "'); window.location.reload();</script>";
+    } else {
+        echo "<script>alert('Nur der Administrator kann Produkte löschen.');</script>";
     }
 }
 
-// Handle product addition and admin rights
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bezeichnung']) && !empty($_POST['bezeichnung'])) {
+// Handle product addition
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bezeichnung'])) {
     $kundennummer = $_POST['kundennummer'];
-    $sqlAdmin = "SELECT KNr FROM Kunde WHERE Vorname = 'admin'";
-    $result = $db->query($sqlAdmin);
-    $adminKNr = $result->fetch_assoc()['KNr'];
 
     if ($kundennummer == $adminKNr) {
         $bezeichnung = $db->real_escape_string($_POST['bezeichnung']);
@@ -52,9 +69,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bezeichnung']) && !em
     } else {
         echo "<script>alert('Nur der Administrator kann Produkte hinzufügen.');</script>";
     }
-    $result->free();
 }
 ?>
+
 
 
 
@@ -108,6 +125,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bezeichnung']) && !em
 
     <h2>Produkt löschen</h2>
     <form method="POST">
+        <label for="kundennummer">Kundennummer:</label><br>
+        <input type="number" id="kundennummer" name="kundennummer" required><br>
         <label for="product_id">Produkt ID:</label>
         <input type="number" id="product_id" name="product_id" required><br>
         <input type="submit" name="delete_product" value="DELETE">
