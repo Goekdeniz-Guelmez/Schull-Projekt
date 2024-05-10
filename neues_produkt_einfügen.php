@@ -1,39 +1,62 @@
 <?php
-    session_start();
-    
-    include "dbConfig.php";
+session_start();
+include "dbConfig.php";
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $kundennummer = $_POST['kundennummer'];
+// Handle product deletion
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_product'])) {
+    $product_id = $_POST['product_id'];
 
-        // Holt die KNr des Benutzers 'admin'
-        $sqlAdmin = "SELECT KNr FROM Kunde WHERE Vorname = 'admin'";
-        $result = $db->query($sqlAdmin);
-        $adminKNr = $result->fetch_assoc()['KNr'];
+    $db->autocommit(FALSE);
 
-        // Überprüfung, ob die eingegebene KNr mit der KNr des 'admin' übereinstimmt
-        if ($kundennummer == $adminKNr) {
-            $bezeichnung = $db->real_escape_string($_POST['bezeichnung']);
-            $beschreibung = $db->real_escape_string($_POST['beschreibung']);
-            $preis = $db->real_escape_string($_POST['preis']);
-            $bildDateiname = $db->real_escape_string($_POST['bild']);
-            $bild = "../bilder/" . $bildDateiname; // Hinzufügen des Pfades vor dem Dateinamen
+    try {
+        $sqlDeleteProduct = "DELETE FROM Artikel WHERE ANr = ?";
+        $stmtDeleteProduct = $db->prepare($sqlDeleteProduct);
+        $stmtDeleteProduct->bind_param("i", $product_id);
+        $stmtDeleteProduct->execute();
 
-            $sql = "INSERT INTO Artikel (Bezeichnung, Beschreibung, Preis, Bild) VALUES (?, ?, ?, ?)";
-            $stmt = $db->prepare($sql);
-            $stmt->bind_param("ssds", $bezeichnung, $beschreibung, $preis, $bild);
-            if ($stmt->execute()) {
-                echo "<script>alert('Produkt erfolgreich hinzugefügt.'); window.location.reload();</script>";
-            } else {
-                echo "<script>alert('Fehler beim Hinzufügen des Produkts: " . $stmt->error . "'); window.location.reload();</script>";
-            }
-            $stmt->close();
+        if ($stmtDeleteProduct->affected_rows > 0) {
+            $db->commit();
+            echo "<script>alert('Produkt erfolgreich gelöscht.'); window.location.reload();</script>";
         } else {
-            echo "<script>alert('Nur der Administrator kann Produkte hinzufügen.');</script>";
+            throw new Exception("Produkt nicht gefunden oder bereits gelöscht.");
         }
-        $result->free();
+    } catch (Exception $e) {
+        $db->rollback();
+        echo "<script>alert('Fehler beim Löschen des Produkts: " . $e->getMessage() . "'); window.location.reload();</script>";
     }
+}
+
+// Handle product addition and admin rights
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bezeichnung']) && !empty($_POST['bezeichnung'])) {
+    $kundennummer = $_POST['kundennummer'];
+    $sqlAdmin = "SELECT KNr FROM Kunde WHERE Vorname = 'admin'";
+    $result = $db->query($sqlAdmin);
+    $adminKNr = $result->fetch_assoc()['KNr'];
+
+    if ($kundennummer == $adminKNr) {
+        $bezeichnung = $db->real_escape_string($_POST['bezeichnung']);
+        $beschreibung = $db->real_escape_string($_POST['beschreibung']);
+        $preis = $db->real_escape_string($_POST['preis']);
+        $bildDateiname = $db->real_escape_string($_POST['bild']);
+        $bild = "../bilder/" . $bildDateiname;
+
+        $sql = "INSERT INTO Artikel (Bezeichnung, Beschreibung, Preis, Bild) VALUES (?, ?, ?, ?)";
+        $stmt = $db->prepare($sql);
+        $stmt->bind_param("ssds", $bezeichnung, $beschreibung, $preis, $bild);
+        if ($stmt->execute()) {
+            echo "<script>alert('Produkt erfolgreich hinzugefügt.'); window.location.reload();</script>";
+        } else {
+            echo "<script>alert('Fehler beim Hinzufügen des Produkts: " . $stmt->error . "'); window.location.reload();</script>";
+        }
+        $stmt->close();
+    } else {
+        echo "<script>alert('Nur der Administrator kann Produkte hinzufügen.');</script>";
+    }
+    $result->free();
+}
 ?>
+
+
 
 
 <!DOCTYPE html>
@@ -79,5 +102,16 @@
         <input type="text" id="bild" name="bild" required><br>
         <input type="submit" value="Produkt hinzufügen">
     </form>
+
+    <br>
+    <br>
+
+    <h2>Produkt löschen</h2>
+    <form method="POST">
+        <label for="product_id">Produkt ID:</label>
+        <input type="number" id="product_id" name="product_id" required><br>
+        <input type="submit" name="delete_product" value="DELETE">
+    </form>
+
 </body>
 </html>
