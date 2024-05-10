@@ -8,12 +8,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $strasse = $_POST["strasse"];
     $hausnummer = $_POST["hausnummer"];
     $plz = $_POST["plz"];
-    $ort = $_POST["ort"];
+    $ort = $_POST["ort"]; // Capture 'ort' from POST data
 
     $db->autocommit(FALSE);
 
     try {
-        // Vorhandene PLZ überprüfen und ggf. hinzufügen
+        // Check if PLZ exists and optionally insert it
         $sqlCheckPLZ = "SELECT PLZ FROM Ort WHERE PLZ = ?";
         $stmtCheckPLZ = $db->prepare($sqlCheckPLZ);
         $stmtCheckPLZ->bind_param("i", $plz);
@@ -21,20 +21,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $resultCheckPLZ = $stmtCheckPLZ->get_result();
 
         if ($resultCheckPLZ->num_rows === 0) {
-            $sqlInsertPLZ = "INSERT INTO Ort (PLZ, Name) VALUES (?, '')";
+            $sqlInsertPLZ = "INSERT INTO Ort (PLZ, Name) VALUES (?, ?)";
             $stmtInsertPLZ = $db->prepare($sqlInsertPLZ);
-            $stmtInsertPLZ->bind_param("i", $plz, $ort);
+            $stmtInsertPLZ->bind_param("is", $plz, $ort); // Include 'ort' in the insertion
             $stmtInsertPLZ->execute();
         }
 
-        // Anschrift einfügen
+        // Insert address
         $sqlAnschrift = "INSERT INTO Anschrift (PLZ, Straße, Hausnummer) VALUES (?, ?, ?)";
         $stmtAnschrift = $db->prepare($sqlAnschrift);
         $stmtAnschrift->bind_param("iss", $plz, $strasse, $hausnummer);
         $stmtAnschrift->execute();
         $anschriftId = $db->insert_id;
 
-        // Kunde einfügen
+        // Insert customer
         $sqlKunde = "INSERT INTO Kunde (Vorname, Nachname, AnsID, Email) VALUES (?, ?, ?, ?)";
         $stmtKunde = $db->prepare($sqlKunde);
         $stmtKunde->bind_param("ssis", $vorname, $nachname, $anschriftId, $email);
@@ -43,22 +43,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $db->commit();
 
-        // E-Mail senden
+        // Email confirmation
         $subject = 'Willkommen bei uns!';
         $message = "Hallo $vorname,\n\nVielen Dank für deine Registrierung. Deine Kundennummer lautet: $kundennummer";
         $headers = 'From: noreply@example.com' . "\r\n" .
                    'Reply-To: noreply@example.com' . "\r\n" .
                    'X-Mailer: PHP/' . phpversion();
-
         mail($email, $subject, $message, $headers);
 
-        $successMessage = "Registrierung erfolgreich! Ihre Kundennummer lautet: $kundennummer. Wir haben Ihnen auch eine Mail gesended.";
+        $successMessage = "Registrierung erfolgreich! Ihre Kundennummer lautet: $kundennummer. Wir haben Ihnen auch eine Mail gesendet.";
     } catch (Exception $e) {
         $db->rollback();
         $errorMessage = "Fehler beim Registrieren: " . $e->getMessage();
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="de">
@@ -76,10 +76,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
             <ul class="nav navbar-nav">
-                <li class="active">
+                <li>
                     <a href="home.php">Home (Produkte)</a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="registrieren.php">Registrierung</a>
                 </li>
                 <li>
@@ -110,6 +110,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <label for="plz">PLZ:</label>
         <input type="number" id="plz" name="plz" required><br>
+
+        <label for="plz">Ort:</label>
+        <input type="text" id="ort" name="ort" required><br>
 
         <input type="submit" value="Registrieren">
     </form>

@@ -104,13 +104,13 @@ function displayWarenkorb() {
             </div>
 
             <ul class="nav navbar-nav">
-                <li class="active">
+                <li>
                     <a href="home.php">Home (Produkte)</a>
                 </li>
                 <li>
                     <a href="registrieren.php">Registrierung</a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="bestellen.php">bestellungs formular</a>
                 </li>
             </ul>
