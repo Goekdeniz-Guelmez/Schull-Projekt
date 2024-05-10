@@ -88,9 +88,9 @@ include "dbConfig.php";
                     <div class="row">
                         <div class="col-md-6">
                             <p class="lead">
-                                <?php echo "€" .
+                                <?php echo
                                 $row["Preis"] .
-                                " EU"; ?>
+                                " €"; ?>
                             </p>
                         </div>
                     </div>

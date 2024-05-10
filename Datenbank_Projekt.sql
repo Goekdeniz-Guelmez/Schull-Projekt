@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS Artikel (
     ANr int(11) NOT NULL AUTO_INCREMENT,
     Bezeichnung varchar(100) NOT NULL,
     Beschreibung varchar(1000),
-    Preis double(10,4) NOT NULL,
+    Preis double(10,2) NOT NULL,
     Bild varchar(255),
     PRIMARY KEY (ANr)
 );

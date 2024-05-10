@@ -8,6 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $strasse = $_POST["strasse"];
     $hausnummer = $_POST["hausnummer"];
     $plz = $_POST["plz"];
+    $ort = $_POST["ort"];
 
     $db->autocommit(FALSE);
 
@@ -22,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($resultCheckPLZ->num_rows === 0) {
             $sqlInsertPLZ = "INSERT INTO Ort (PLZ, Name) VALUES (?, '')";
             $stmtInsertPLZ = $db->prepare($sqlInsertPLZ);
-            $stmtInsertPLZ->bind_param("i", $plz);
+            $stmtInsertPLZ->bind_param("i", $plz, $ort);
             $stmtInsertPLZ->execute();
         }
 
@@ -124,7 +125,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php endif; ?>
 
     <footer>
-        <p>Develped by Gökdeniz and Ralf. Databank modelling by Andian and Elias, Project Management by Natalie</p>
+        <p>Develped by Gökdeniz and Ralf. Databank modelling by Adrian and Elias, Project Management by Natalie</p>
     </footer>
 </body>
 </html>

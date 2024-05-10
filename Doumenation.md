@@ -58,3 +58,15 @@ Für eine Weiterentwicklung des Codes könnten folgende Aspekte verbessert oder 
 - Verwendung einer externen Bibliothek wie PHPMailer für den E-Mail-Versand für zuverlässigere Funktionalität und bessere Handhabung.
 
 Diese Dokumentation sollte als Ausgangspunkt dienen, um die Funktionalität und Struktur des Codes zu verstehen und zukünftige Anpassungen oder Erweiterungen vorzunehmen.
+
+
+
+# bestellen seite
+
+
+
+# neues produkt einfügen seite machen
+
+
+
+# sql code umändern so das dpuble von 10,4 zu 10,2
