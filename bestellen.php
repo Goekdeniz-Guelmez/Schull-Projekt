@@ -107,15 +107,21 @@ function displayWarenkorb() {
                 <li>
                     <a href="home.php">Home (Produkte)</a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="registrieren.php">Registrierung</a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="bestellen.php">Bestellformular</a>
                 </li>
             </ul>
         </div>
     </nav>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
     <h1>Produkt bestellen</h1>
 

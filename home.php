@@ -26,10 +26,10 @@ include "dbConfig.php";
             </div>
 
             <ul class="nav navbar-nav">
-                <li>
+                <li class="active">
                     <a href="home.php">Home (Produkte)</a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="registrieren.php">Registrierung</a>
                 </li>
                 <li>
