@@ -61,6 +61,7 @@ p {
 
 
 
+
 /* Ensures the navigation bar extends full width of its container */
 .navbar {
     width: 100%;
@@ -93,13 +94,13 @@ p {
     padding: 10px; /* Adds some padding around each nav item */
 }
 
-.navbar-nav li a {
+.navbar-nav li a, .navbar-header a {
     text-decoration: none;
 }
 
-.navbar-nav li a:hover {
-    -webkit-filter: brightness(70%);
-    filter: brightness(70%);
+.navbar-nav li a:hover, .navbar-header a:hover {
+    -webkit-filter: brightness(50%);
+    filter: brightness(50%);
 }
 
 .navbar-nav li.active a {

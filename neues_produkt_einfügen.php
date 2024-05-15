@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bezeichnung'])) {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="index.html">Smart GmbH</a>
