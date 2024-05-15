@@ -84,21 +84,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bezeichnung'])) {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">E-Shop</a>
+                <a class="navbar-brand" href="index.html">Smart GmbH</a>
             </div>
 
             <ul class="nav navbar-nav">
-                <li class="active">
+                <li>
                     <a href="home.php">Home (Produkte)</a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="registrieren.php">Registrierung</a>
                 </li>
                 <li>
-                    <a href="bestellen.php">bestellungs formular</a>
+                    <a href="bestellen.php">Bestellformular</a>
                 </li>
             </ul>
         </div>
