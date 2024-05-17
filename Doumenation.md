@@ -65,8 +65,8 @@ Diese Dokumentation sollte als Ausgangspunkt dienen, um die Funktionalität und 
 
 
 
-# neues produkt einfügen seite machen
+# neues produkt einfügen seite gemacht
 
 
 
-# sql code umändern so das dpuble von 10,4 zu 10,2
+# sql code umändern so das double von 10,4 zu 10,2
