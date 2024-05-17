@@ -51,14 +51,6 @@ Der PHP-Code ermöglicht die Registrierung neuer Kunden in einer Datenbank. Der 
 - Der Code verwendet Prepared Statements, um SQL-Injection zu verhindern.
 - Es ist wichtig, dass auch die `dbConfig.php` sichere Methoden zur Verwaltung der Datenbankverbindung verwendet.
 
-### Weiterentwicklung
-Für eine Weiterentwicklung des Codes könnten folgende Aspekte verbessert oder ergänzt werden:
-- Validierung der Eingaben auf Serverseite zur Verbesserung der Datensicherheit und -integrität.
-- Erweiterte Fehlermeldungen und Nutzerfeedback auf der Website.
-- Verwendung einer externen Bibliothek wie PHPMailer für den E-Mail-Versand für zuverlässigere Funktionalität und bessere Handhabung.
-
-Diese Dokumentation sollte als Ausgangspunkt dienen, um die Funktionalität und Struktur des Codes zu verstehen und zukünftige Anpassungen oder Erweiterungen vorzunehmen.
-
 
 
 # bestellen seite
