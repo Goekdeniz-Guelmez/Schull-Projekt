@@ -68,3 +68,4 @@ TODO:
  - das active class im index.html link packen im nav
  - index.html muss bestellung formular zu bestellformular
  - PLZ mit Name als Primär schlüssel machen?
+ - Wenn PLZ auch gleich ist aber name anders dan so einspeichern

@@ -43,14 +43,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $db->commit();
 
-        // Email confirmation
-        $subject = 'Willkommen bei uns!';
-        $message = "Hallo $vorname,\n\nVielen Dank für deine Registrierung. Deine Kundennummer lautet: $kundennummer";
-        $headers = 'From: noreply@example.com' . "\r\n" .
-                   'Reply-To: noreply@example.com' . "\r\n" .
-                   'X-Mailer: PHP/' . phpversion();
-        mail($email, $subject, $message, $headers);
-
         $successMessage = "Registrierung erfolgreich! Ihre Kundennummer lautet: $kundennummer. Wir haben Ihnen auch eine Mail gesendet.";
     } catch (Exception $e) {
         $db->rollback();
