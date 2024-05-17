@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $db->commit();
 
-        $successMessage = "Registrierung erfolgreich! Ihre Kundennummer lautet: $kundennummer. Wir haben Ihnen auch eine Mail gesendet.";
+        $successMessage = "Registrierung erfolgreich! Ihre Kundennummer lautet: $kundennummer. Bitte notieren sie sich diese ID nummer.";
     } catch (Exception $e) {
         $db->rollback();
         $errorMessage = "Fehler beim Registrieren: " . $e->getMessage();

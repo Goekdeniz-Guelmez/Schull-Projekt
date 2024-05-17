@@ -69,3 +69,4 @@ TODO:
  - index.html muss bestellung formular zu bestellformular
  - PLZ mit Name als Primär schlüssel machen?
  - Wenn PLZ auch gleich ist aber name anders dan so einspeichern
+ - Wahrenkorp nach oben setzen
