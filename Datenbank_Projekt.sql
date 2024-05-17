@@ -6,7 +6,7 @@ USE shop;
 CREATE TABLE IF NOT EXISTS Ort (
     PLZ int(11) NOT NULL,
     Name varchar(100) NOT NULL,
-    PRIMARY KEY (PLZ)
+    PRIMARY KEY (PLZ, Name)
 );
 
 CREATE TABLE IF NOT EXISTS Anschrift (
