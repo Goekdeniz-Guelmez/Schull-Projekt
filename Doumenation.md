@@ -70,3 +70,9 @@ Diese Dokumentation sollte als Ausgangspunkt dienen, um die Funktionalität und 
 
 
 # sql code umändern so das double von 10,4 zu 10,2
+
+
+TODO:
+ - das active class im index.html link packen im nav
+ - index.html muss bestellung formular zu bestellformular
+ - PLZ mit Name als Primär schlüssel machen?
