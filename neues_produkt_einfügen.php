@@ -1,72 +1,89 @@
 <?php
+// Starten der Session, um Sitzungsdaten zu speichern
 session_start();
-include "dbConfig.php";
+include "dbConfig.php"; // Einbinden der Datenbankkonfigurationsdatei
 
-// Fetch the admin customer number only once per session if not already fetched
+// Abrufen der Administratorkundennummer nur einmal pro Sitzung, falls noch nicht geschehen
 if (!isset($_SESSION['adminKNr'])) {
+    // SQL-Abfrage, um die Kundennummer des Administrators zu erhalten
     $sqlAdmin = "SELECT KNr FROM Kunde WHERE Vorname = 'admin'";
-    $result = $db->query($sqlAdmin);
+    $result = $db->query($sqlAdmin); // Ausführen der Abfrage
     if ($result) {
+        // Administratorkundennummer aus dem Ergebnis abrufen und in der Sitzung speichern
         $adminKNr = $result->fetch_assoc()['KNr'];
-        $_SESSION['adminKNr'] = $adminKNr; // Store admin KNr in session for later use
+        $_SESSION['adminKNr'] = $adminKNr; // Administratorkundennummer in der Sitzung speichern
     } else {
+        // Fehlermeldung anzeigen und Ausführung stoppen, wenn die Administratorkundennummer nicht abgerufen werden kann
         echo "<script>alert('Administratorzugriff konnte nicht verifiziert werden.');</script>";
-        exit; // Stop execution if admin KNr cannot be fetched
+        exit; // Beenden der Ausführung
     }
 } else {
+    // Verwenden der gespeicherten Administratorkundennummer aus der Sitzung
     $adminKNr = $_SESSION['adminKNr'];
 }
 
-// Handle product deletion
+// Behandlung der Produktlöschung
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_product'])) {
     $kundennummer = $_POST['kundennummer'];
     $product_id = $_POST['product_id'];
 
+    // Überprüfen, ob die Kundennummer mit der Administratorkundennummer übereinstimmt
     if ($kundennummer == $adminKNr) {
-        $db->autocommit(FALSE);
+        $db->autocommit(FALSE); // Deaktivieren der automatischen Commit-Funktion
 
         try {
+            // SQL-Anweisung zum Löschen eines Produkts
             $sqlDeleteProduct = "DELETE FROM Artikel WHERE ANr = ?";
-            $stmtDeleteProduct = $db->prepare($sqlDeleteProduct);
-            $stmtDeleteProduct->bind_param("i", $product_id);
-            $stmtDeleteProduct->execute();
+            $stmtDeleteProduct = $db->prepare($sqlDeleteProduct); // Vorbereitung der SQL-Anweisung
+            $stmtDeleteProduct->bind_param("i", $product_id); // Binden der Produkt-ID an die SQL-Anweisung
+            $stmtDeleteProduct->execute(); // Ausführen der SQL-Anweisung
 
+            // Überprüfen, ob das Produkt erfolgreich gelöscht wurde
             if ($stmtDeleteProduct->affected_rows > 0) {
-                $db->commit();
+                $db->commit(); // Änderungen in der Datenbank festschreiben
                 echo "<script>alert('Produkt erfolgreich gelöscht.'); window.location.reload();</script>";
             } else {
+                // Fehler werfen, wenn das Produkt nicht gefunden wurde oder bereits gelöscht ist
                 throw new Exception("Produkt nicht gefunden oder bereits gelöscht.");
             }
         } catch (Exception $e) {
+            // Änderungen zurücksetzen bei Fehler
             $db->rollback();
             echo "<script>alert('Fehler beim Löschen des Produkts: " . $e->getMessage() . "'); window.location.reload();</script>";
         }
     } else {
+        // Fehlermeldung anzeigen, wenn die Kundennummer nicht die des Administrators ist
         echo "<script>alert('Nur der Administrator kann Produkte löschen.');</script>";
     }
 }
 
-// Handle product addition
+// Behandlung der Produkthinzufügung
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bezeichnung'])) {
     $kundennummer = $_POST['kundennummer'];
 
+    // Überprüfen, ob die Kundennummer mit der Administratorkundennummer übereinstimmt
     if ($kundennummer == $adminKNr) {
+        // POST-Daten sichern und speichern
         $bezeichnung = $db->real_escape_string($_POST['bezeichnung']);
         $beschreibung = $db->real_escape_string($_POST['beschreibung']);
         $preis = $db->real_escape_string($_POST['preis']);
         $bildDateiname = $db->real_escape_string($_POST['bild']);
-        $bild = "../bilder/" . $bildDateiname;
+        $bild = "../bilder/" . $bildDateiname; // Pfad zum Bild festlegen
 
+        // SQL-Anweisung zum Hinzufügen eines neuen Produkts
         $sql = "INSERT INTO Artikel (Bezeichnung, Beschreibung, Preis, Bild) VALUES (?, ?, ?, ?)";
-        $stmt = $db->prepare($sql);
+        $stmt = $db->prepare($sql); // Vorbereitung der SQL-Anweisung
         $stmt->bind_param("ssds", $bezeichnung, $beschreibung, $preis, $bild);
         if ($stmt->execute()) {
+            // Erfolgsmeldung anzeigen und Seite neu laden
             echo "<script>alert('Produkt erfolgreich hinzugefügt.'); window.location.reload();</script>";
         } else {
+            // Fehlermeldung anzeigen bei Fehler
             echo "<script>alert('Fehler beim Hinzufügen des Produkts: " . $stmt->error . "'); window.location.reload();</script>";
         }
-        $stmt->close();
+        $stmt->close(); // Schließen der vorbereiteten Anweisung
     } else {
+        // Fehlermeldung anzeigen, wenn die Kundennummer nicht die des Administrators ist
         echo "<script>alert('Nur der Administrator kann Produkte hinzufügen.');</script>";
     }
 }
@@ -106,6 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bezeichnung'])) {
 
     <h2>Produkt hinzufügen</h2>
 
+    <!-- Formular zum Hinzufügen eines neuen Produkts -->
     <form method="post">
         <label for="kundennummer">Kundennummer:</label><br>
         <input type="number" id="kundennummer" name="kundennummer" required><br>
@@ -123,6 +141,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bezeichnung'])) {
     <br>
     <br>
 
+    <!-- Formular zum Löschen eines Produkts -->
     <h2>Produkt löschen</h2>
     <form method="POST">
         <label for="kundennummer">Kundennummer:</label><br>

@@ -1,7 +1,10 @@
 <?php
+// Datenbankkonfiguration einbinden
 include "dbConfig.php";
 
+// Überprüfen, ob das Formular mit der POST-Methode abgeschickt wurde
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // POST-Daten in Variablen speichern
     $vorname = $_POST["vorname"];
     $nachname = $_POST["nachname"];
     $email = $_POST["email"];
@@ -10,42 +13,54 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $plz = $_POST["plz"];
     $ort = $_POST["ort"]; // Capture 'ort' from POST data
 
+    // Automatische Commit-Funktion der Datenbank deaktivieren
     $db->autocommit(FALSE);
 
     try {
-        // Check if PLZ exists and optionally insert it
+        // Überprüfen, ob die eingegebene PLZ bereits in der Datenbank existiert
         $sqlCheckPLZ = "SELECT PLZ FROM Ort WHERE PLZ = ?";
+        // Diese Methode bereitet eine SQL-Anweisung zur Ausführung vor. Sie schützt die Anwendung vor SQL-Injection-Angriffen, indem sie Platzhalter (?) in der SQL-Abfrage verwendet, die später mit den tatsächlichen Werten ersetzt werden.
         $stmtCheckPLZ = $db->prepare($sqlCheckPLZ);
-        $stmtCheckPLZ->bind_param("i", $plz);
-        $stmtCheckPLZ->execute();
-        $resultCheckPLZ = $stmtCheckPLZ->get_result();
+        // Diese Methode bindet die tatsächlichen Werte an die Platzhalter in der vorbereiteten SQL-Anweisung. Sie nimmt die Datentypen und die entsprechenden Variablen als Parameter und sorgt dafür, dass die Werte richtig in die SQL-Anweisung eingefügt werden. Die Datentypen sind:
+        // i für Integer
+        // d für Double
+        // s für String
+        // b für Blob
+        $stmtCheckPLZ->bind_param("i", $plz); 
+        $stmtCheckPLZ->execute(); # Diese Methode führt die vorbereitete und gebundene SQL-Anweisung aus. Nach dem Binden der Parameter wird die Abfrage an die Datenbank gesendet und ausgeführt.
+        $resultCheckPLZ = $stmtCheckPLZ->get_result(); // Holt das Ergebnis der Abfrage, falls diese Daten zurückgibt.
 
+        // Wenn die PLZ nicht existiert, einen neuen Eintrag für PLZ und Ort hinzufügen
         if ($resultCheckPLZ->num_rows === 0) {
             $sqlInsertPLZ = "INSERT INTO Ort (PLZ, Name) VALUES (?, ?)";
             $stmtInsertPLZ = $db->prepare($sqlInsertPLZ);
-            $stmtInsertPLZ->bind_param("is", $plz, $ort); // Include 'ort' in the insertion
+            $stmtInsertPLZ->bind_param("is", $plz, $ort); // 'Ort' und 'PLZ' in die Einfügeoperation einbinden
             $stmtInsertPLZ->execute();
         }
 
-        // Insert address
+        // Anschrift in die Datenbank einfügen
         $sqlAnschrift = "INSERT INTO Anschrift (PLZ, Straße, Hausnummer) VALUES (?, ?, ?)";
         $stmtAnschrift = $db->prepare($sqlAnschrift);
         $stmtAnschrift->bind_param("iss", $plz, $strasse, $hausnummer);
         $stmtAnschrift->execute();
-        $anschriftId = $db->insert_id;
+        $anschriftId = $db->insert_id; // Die ID der eingefügten Anschrift speichern
 
-        // Insert customer
+        // Kundendaten in die Datenbank einfügen
         $sqlKunde = "INSERT INTO Kunde (Vorname, Nachname, AnsID, Email) VALUES (?, ?, ?, ?)";
         $stmtKunde = $db->prepare($sqlKunde);
         $stmtKunde->bind_param("ssis", $vorname, $nachname, $anschriftId, $email);
         $stmtKunde->execute();
-        $kundennummer = $db->insert_id;
+        $kundennummer = $db->insert_id; // Die Kundennummer speichern
 
+        // Alle Änderungen in der Datenbank festschreiben
         $db->commit();
 
+        // Erfolgsnachricht festlegen
         $successMessage = "Registrierung erfolgreich! Ihre Kundennummer lautet: $kundennummer. Bitte notieren sie sich diese ID nummer.";
     } catch (Exception $e) {
+        // Bei einem Fehler alle Änderungen rückgängig machen
         $db->rollback();
+        // Fehlermeldung festlegen
         $errorMessage = "Fehler beim Registrieren: " . $e->getMessage();
     }
 }
@@ -83,6 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <h1>Kundenregistrierung</h1>
 
+    <!-- Formular für die Kundenregistrierung -->
     <form method="POST">
         <label for="vorname">Vorname:</label>
         <input type="text" id="vorname" name="vorname" required><br>
@@ -109,6 +125,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="submit" value="Registrieren">
     </form>
 
+    <!-- Anzeige der Erfolgs- oder Fehlermeldung -->
     <?php if (isset($successMessage)): ?>
     <script>
         alert('<?php echo $successMessage; ?>');
