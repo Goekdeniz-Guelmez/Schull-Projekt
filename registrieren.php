@@ -13,8 +13,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $plz = $_POST["plz"];
     $ort = $_POST["ort"];
 
-    // Automatische Commit-Funktion der Datenbank deaktivieren
-    $db->autocommit(FALSE);
+    // Überprüfen, ob der Benutzername oder die E-Mail bereits existieren
+    $sqlCheckUser = "SELECT * FROM Kunde WHERE Vorname = ? OR Email = ?";
+    $stmtCheckUser = $db->prepare($sqlCheckUser);
+    $stmtCheckUser->bind_param("ss", $vorname, $email);
+    $stmtCheckUser->execute();
+    $resultCheckUser = $stmtCheckUser->get_result();
+
+    // Wenn der Benutzername oder die E-Mail bereits existieren, Fehlermeldung anzeigen
+    if ($resultCheckUser->num_rows > 0) {
+        $errorMessage = "Der Benutzername oder die E-Mail-Adresse sind bereits vergeben. Bitte wählen Sie einen anderen Namen oder eine andere E-Mail.";
+    } else {
+        // Automatische Commit-Funktion der Datenbank deaktivieren
+        $db->autocommit(FALSE);
 
     try {
         // Überprüfen, ob die eingegebene PLZ bereits in der Datenbank existiert

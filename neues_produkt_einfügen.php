@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bezeichnung'])) {
         $beschreibung = $db->real_escape_string($_POST['beschreibung']);
         $preis = $db->real_escape_string($_POST['preis']);
         $bildDateiname = $db->real_escape_string($_POST['bild']);
-        $bild = "../bilder/" . $bildDateiname; // Pfad zum Bild festlegen
+        $bild = "../bilder/" . $bildDateiname; // Pfad zum Bild festlegen, somit muss der user nur den namen und die datei art eingeben z.B. bild.png anstelle vom gesammten pfad.
 
         // SQL-Anweisung zum Hinzufügen eines neuen Produkts
         $sql = "INSERT INTO Artikel (Bezeichnung, Beschreibung, Preis, Bild) VALUES (?, ?, ?, ?)";
