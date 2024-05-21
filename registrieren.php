@@ -137,15 +137,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="submit" value="Registrieren">
     </form>
 
-    <!-- Anzeige der Erfolgs- oder Fehlermeldung -->
-    <?php if (isset($successMessage)): ?>
-    <script>
-        alert('<?php echo $successMessage; ?>');
-    </script>
-    <?php elseif (isset($errorMessage)): ?>
-    <script>
-        alert('<?php echo $errorMessage; ?>');
-    </script>
+    <!-- Anzeige der Erfolgs- oder Fehlermeldung und Neuladen der Seite -->
+    <?php if (isset($successMessage) || isset($errorMessage)): ?>
+        <script>
+            alert('<?php echo $successMessage ?? $errorMessage; ?>');
+            window.location.reload();
+        </script>
     <?php endif; ?>
 
     <footer>
