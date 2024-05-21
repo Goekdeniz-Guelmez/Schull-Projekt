@@ -1,9 +1,9 @@
 <?php
-session_start(); // Startet eine neue Session oder setzt eine vorhandene fort
+// Starten der Session, um Sitzungsdaten zu speichern
+session_start();
+include "dbConfig.php"; // Einbinden der Datenbankkonfigurationsdatei
 
-// Hier wird die Datenbankverknüpfung eingebunden
-include "dbConfig.php";
-
+// Erstelle zuerst ein leeren Warenkorp
 if (!isset($_SESSION['warenkorb'])) {
     $_SESSION['warenkorb'] = array();
     $_SESSION['gesamtsumme'] = 0;
