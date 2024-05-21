@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $strasse = $_POST["strasse"];
     $hausnummer = $_POST["hausnummer"];
     $plz = $_POST["plz"];
-    $ort = $_POST["ort"]; // Capture 'ort' from POST data
+    $ort = $_POST["ort"];
 
     // Automatische Commit-Funktion der Datenbank deaktivieren
     $db->autocommit(FALSE);
