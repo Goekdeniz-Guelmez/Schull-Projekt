@@ -1,6 +1,5 @@
 <?php
-// Hier wird die Datenbank verknüpft
-include "dbConfig.php";
+include "dbConfig.php"; // Einbinden der Datenbankkonfigurationsdatei
 ?>
 
 <!-- HTML ANFANG -->
