@@ -62,14 +62,13 @@ p {
 
 
 
-/* Ensures the navigation bar extends full width of its container */
+
 .navbar {
     width: 100%;
     border-bottom: var(--text-color) 1px solid;
     margin-bottom: 10vh;
 }
 
-/* Flexbox setup for the container to align children horizontally */
 .container-fluid {
     display: flex;
     justify-content: space-between;
@@ -79,19 +78,18 @@ p {
 }
 
 .navbar-header {
-    flex-grow: 1; /* Allows the brand logo to take up necessary space */
+    flex-grow: 1;
 }
 
-/* Display navigation items in a row */
 .navbar-nav {
-    list-style: none; /* Removes default list styling */
-    display: flex; /* Aligns the navigation items horizontally */
-    padding: 0; /* Removes default padding */
-    margin: 0; /* Removes default margin */
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
 }
 
 .navbar-nav li {
-    padding: 10px; /* Adds some padding around each nav item */
+    padding: 10px;
 }
 
 .navbar-nav li a, .navbar-header a {
