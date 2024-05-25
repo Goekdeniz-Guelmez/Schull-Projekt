@@ -100,7 +100,7 @@ include "dbConfig.php"; // Einbinden der Datenbankkonfigurationsdatei
         <?php }
         } else {
              ?>
-        <p>Produkt(e) wurden nicht gefunden.</p>
+        <p>Produkte wurden nicht gefunden.</p>
         <?php
         }
         ?>
