@@ -30,9 +30,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* Minimum height of 100% of the viewport height */
-    flex-direction: column; /* Stacks flex items vertically */
-    margin: 0; /* Removes default margin */
+    min-height: 100vh;
+    flex-direction: column;
+    margin: 0;
 }
 
 a {
