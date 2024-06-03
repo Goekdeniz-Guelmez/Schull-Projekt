@@ -830,6 +830,3 @@ Der Footer enthält Informationen über
 </html>
 ```
 
-### Zusammenfassung
-
-Die `bestellen.php` Datei ermöglicht es den Benutzern, Produkte zu bestellen, indem sie eine Produkt-ID und Menge angeben, die dann im Warenkorb gespeichert werden. Die Seite zeigt den Warenkorb an, erlaubt das Entfernen von Produkten und das Abschließen der Bestellung. Die Bestellinformationen werden in der Datenbank gespeichert und die Session wird genutzt, um die Warenkorbdaten zu verwalten. Die Struktur der Datei ist so gestaltet, dass sie eine klare und benutzerfreundliche Oberfläche für die Bestellung von Produkten bietet.
