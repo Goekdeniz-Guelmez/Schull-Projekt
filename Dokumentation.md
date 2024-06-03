@@ -1,9 +1,12 @@
 # Schul Projekt
 
-### Projektübersicht
+## Projektübersicht
+
 Für mein Schulprojekt habe ich eine fiktive Shopping-Seite erstellt, die es Nutzern ermöglicht, Produkte anzusehen, sich zu registrieren und Bestellungen aufzugeben. Die Webseite wurde mithilfe von HTML, CSS und PHP entwickelt und nutzt eine MySQL-Datenbank zur Verwaltung der Daten. Im Folgenden beschreibe ich die Implementierung der verschiedenen Komponenten der Webseite.
 
 ### Projekt Strucktur:
+
+```text
 | _ Datenbank.sql
 | _ dbConfig.php
 | _ index.html
@@ -19,13 +22,13 @@ Für mein Schulprojekt habe ich eine fiktive Shopping-Seite erstellt, die es Nut
       | _ plug.png
       | _ speaker.jpg
       | _ thermostat.jpg
-
-
+```
 
 
 ## Datenbank.sql
 
 ### Datenbankstruktur
+
 Tabellenstruktur:
 
 - Ort: Speichert Postleitzahlen und Ortsnamen.
@@ -156,12 +159,15 @@ VALUES (0, "admin", "admin", "admin@gmail.com");
 Diese Schritte dokumentieren, wie ich die Datenbank für den Online-Shop erstellt habe. Jede Tabelle wurde sorgfältig geplant und erstellt, um eine konsistente und effiziente Datenverwaltung zu gewährleisten. Die Verwendung von Fremdschlüsseln stellt sicher, dass die Datenintegrität über die verschiedenen Tabellen hinweg gewahrt bleibt.
 
 ### Datenbankkonfiguration
+
 Die Verbindung zur Datenbank wird in einer separaten Konfigurationsdatei eingerichtet. Diese Datei enthält die Zugangsdaten und stellt sicher, dass die Webseite auf die Datenbank zugreifen kann.
 
 ## dbConfig.php:
+
 Eine Konfigurationsdatei (`dbConfig.php`) wurde erstellt, um die Verbindung zur MySQL-Datenbank für die "Smart GmbH" Website zu verwalten. Diese Datei enthält wichtige Informationen zur Datenbankverbindung und stellt sicher, dass die Website mit der Datenbank kommunizieren kann.
 
 ### PHP-Tag und Datenbankdetails
+
 Die Datei beginnt mit dem Öffnen des PHP-Tags. Danach werden die Details der Datenbankverbindung definiert, einschließlich des Hostnamens, des Benutzernamens, des Passworts und des Datenbanknamens. Da es sich um eine lokale Entwicklung handelt, bleibt das Passwortfeld leer.
 
 ```php
@@ -195,6 +201,7 @@ if ($db->connect_error) {
 ```
 
 ## index.html
+
 Dies ist die Startseite der Webseite. Sie enthält eine Navigation und eine Willkommensnachricht.
 
 ```html
@@ -234,9 +241,11 @@ Dies ist die Startseite der Webseite. Sie enthält eine Navigation und eine Will
 ```
 
 ## home.php
+
 Diese Datei zeigt die verfügbaren Produkte an. Sie ruft die Produktdaten aus der Datenbank ab und zeigt sie in einer strukturierten Liste an.
 
 ### PHP-Abschnitt: Einbinden der Datenbankkonfigurationsdatei
+
 Zu Beginn des PHP-Codes binde ich die Datei `dbConfig.php` ein, die die Konfigurationsdetails für die Datenbankverbindung enthält. Dies ermöglicht es, die Datenbankverbindung in dieser Datei zu nutzen.
 
 ```php
@@ -246,6 +255,7 @@ include "dbConfig.php"; // Einbinden der Datenbankkonfigurationsdatei
 ```
 
 ### HTML-Abschnitt: Grundstruktur
+
 Der HTML-Teil der Datei beginnt mit dem `<!DOCTYPE html>` Tag, um den Browser anzuweisen, das Dokument als HTML5 zu interpretieren.
 
 ```html
@@ -254,6 +264,7 @@ Der HTML-Teil der Datei beginnt mit dem `<!DOCTYPE html>` Tag, um den Browser an
 ```
 
 ### HTML-Abschnitt: Kopfbereich (`<head>`)
+
 Im Kopfbereich der Seite setze ich den Zeichensatz auf UTF-8 und definiere den Titel der Seite. Außerdem binde ich eine CSS-Datei (`style.css`) ein, um das Styling der Seite zu ermöglichen. Das `meta`-Tag `viewport` sorgt dafür, dass die Seite auf verschiedenen Geräten gut aussieht.
 
 ```html
@@ -349,6 +360,7 @@ Für jedes Produkt wird ein HTML-Block erstellt, der das Bild, die Bezeichnung, 
 ```
 
 ### Abschließende Tags und Footer
+
 Zum Schluss werden die `div`, `body` und `html` Tags geschlossen. Der Footer enthält Informationen über die Entwickler des Projekts.
 
 ```html
@@ -364,9 +376,11 @@ Zum Schluss werden die `div`, `body` und `html` Tags geschlossen. Der Footer ent
 ```
 
 ## registrieren.php
+
 registrieren.php` ermöglicht es Nutzern, sich auf unsere Website zu registrieren. Diese Seite enthält ein Formular zur Eingabe von Benutzerdaten und verarbeitet die Registrierungsinformationen, indem sie diese in eine Datenbank speichert. Hier ist eine Schritt-für-Schritt-Erklärung des Codes.
 
 ### PHP-Abschnitt: Einbinden der Datenbankkonfigurationsdatei
+
 Zuerst binde ich die Datei `dbConfig.php` ein, die die Konfigurationsdetails für die Datenbankverbindung enthält. Dies ermöglicht es, die Datenbankverbindung in dieser Datei zu nutzen.
 
 ```php
@@ -376,6 +390,7 @@ include "dbConfig.php"; // Datenbankkonfiguration einbinden
 ```
 
 ### Überprüfen, ob das Formular abgeschickt wurde
+
 Ich überprüfe, ob das Formular mit der POST-Methode abgeschickt wurde. Wenn dies der Fall ist, speichere ich die POST-Daten in Variablen.
 
 ```php
@@ -390,6 +405,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ```
 
 ### Überprüfen, ob der Benutzername oder die E-Mail bereits existieren
+
 Ich führe eine SQL-Abfrage aus, um zu überprüfen, ob der Vorname oder die E-Mail-Adresse bereits in der Tabelle `Kunde` existiert.
 
 ```php
@@ -408,6 +424,7 @@ Ich führe eine SQL-Abfrage aus, um zu überprüfen, ob der Vorname oder die E-M
 ```
 
 ### Überprüfen, ob die PLZ bereits existiert
+
 Ich überprüfe, ob die eingegebene PLZ bereits in der Tabelle `Ort` existiert. Wenn nicht, füge ich einen neuen Eintrag für die PLZ und den Ort hinzu.
 
 ```php
@@ -455,6 +472,7 @@ Ich füge die Anschrift in die Tabelle `Anschrift` ein und speichere die generie
 ```
 
 ### HTML-Abschnitt: Grundstruktur
+
 Der HTML-Teil der Datei beginnt mit dem `<!DOCTYPE html>` Tag und setzt die Sprache auf Deutsch.
 
 ```html
@@ -463,6 +481,7 @@ Der HTML-Teil der Datei beginnt mit dem `<!DOCTYPE html>` Tag und setzt die Spra
 ```
 
 ### HTML-Abschnitt: Kopfbereich (`<head>`)
+
 Im Kopfbereich setze ich den Zeichensatz auf UTF-8, definiere den Titel der Seite und binde eine CSS-Datei (`style.css`) ein.
 
 ```html
@@ -474,6 +493,7 @@ Im Kopfbereich setze ich den Zeichensatz auf UTF-8, definiere den Titel der Seit
 ```
 
 ### HTML-Abschnitt: Körperbereich (`<body>`)
+
 Der Hauptteil der Seite beginnt mit dem `<body>` Tag.
 
 ```html
@@ -481,6 +501,7 @@ Der Hauptteil der Seite beginnt mit dem `<body>` Tag.
 ```
 
 ### Navigationsleiste (`<nav>`)
+
 Die Navigationsleiste ermöglicht es den Benutzern, zwischen verschiedenen Seiten der Website zu wechseln.
 
 ```html
@@ -565,17 +586,250 @@ Der Footer enthält Informationen über die Entwickler des Projekts.
 ```
 
 
+## bestellen.php
 
+Produkte bestellen. Diese Seite nutzt eine Datenbankverbindung, um Bestellungen zu speichern, und verwendet Sessions, um den Warenkorb zu verwalten. Hier ist eine detaillierte Erklärung des Codes.
 
+### PHP-Abschnitt: Session starten und Datenbankkonfigurationsdatei einbinden
 
+Zuerst starte ich die Session, um Sitzungsdaten zu speichern, und binde die Datei `dbConfig.php` ein, die die Konfigurationsdetails für die Datenbankverbindung enthält.
 
+```php
+<?php
+session_start(); // Starten der Session, um Sitzungsdaten zu speichern
+include "dbConfig.php"; // Einbinden der Datenbankkonfigurationsdatei
+?>
+```
 
+### Initialisieren des Warenkorbs
 
+Ich überprüfe, ob der Warenkorb bereits in der Session existiert. Falls nicht, initialisiere ich einen leeren Warenkorb und setze die Gesamtsumme auf 0.
 
+```php
+// Erstelle zuerst ein leeren Warenkorp
+if (!isset($_SESSION['warenkorb'])) {
+    $_SESSION['warenkorb'] = array();
+    $_SESSION['gesamtsumme'] = 0;
+}
 
+$productNotFound = false; // Flag für nicht gefundenes Produkt
+```
 
+### Überprüfen, ob das Formular abgeschickt wurde
 
+Ich überprüfe, ob das Formular mit der POST-Methode abgeschickt wurde. Es gibt drei mögliche Aktionen: Speichern eines Produkts im Warenkorb, Entfernen eines Produkts aus dem Warenkorb und Abschließen einer Bestellung.
 
+#### Speichern eines Produkts im Warenkorb
 
+Wenn das Produktformular abgeschickt wurde, hole ich die Produktinformationen aus der Datenbank und speichere das Produkt im Warenkorb.
 
+```php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['speichern'])) {
+        $produktId = $_POST["produktId"];
+        $menge = $_POST["menge"];
+        // Artikelinformationen aus der Datenbank abrufen
+        $sql = "SELECT Bezeichnung, Preis FROM Artikel WHERE ANr = ?";
+        $stmt = $db->prepare($sql);
+        $stmt->bind_param("i", $produktId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $gesamtPreis = $row['Preis'] * $menge;
+            // Artikel und Menge in der Session speichern
+            $_SESSION['warenkorb'][] = array('produktId' => $produktId, 'Bezeichnung' => $row['Bezeichnung'], 'menge' => $menge, 'gesamt' => $gesamtPreis);
+            $_SESSION['gesamtsumme'] += $gesamtPreis;
+        } else {
+            $productNotFound = true;
+        }
+```
 
+#### Entfernen eines Produkts aus dem Warenkorb
+
+Wenn das Entfernen-Formular abgeschickt wurde, entferne ich das Produkt aus dem Warenkorb und aktualisiere die Gesamtsumme.
+
+```php
+    } elseif (isset($_POST['entfernen'])) {
+        // Produkt aus dem Warenkorb entfernen
+        $indexToRemove = $_POST['index'];
+        if (isset($_SESSION['warenkorb'][$indexToRemove])) {
+            $_SESSION['gesamtsumme'] -= $_SESSION['warenkorb'][$indexToRemove]['gesamt'];
+            array_splice($_SESSION['warenkorb'], $indexToRemove, 1);
+        }
+```
+
+#### Abschließen einer Bestellung
+
+Wenn das Bestellformular abgeschickt wurde, speichere ich die Bestellung und die einzelnen Positionen in der Datenbank.
+
+```php
+    } elseif (isset($_POST['bestellen']) && !empty($_SESSION['warenkorb'])) {
+        $kundennummer = $_POST["kundennummer"];  // Kundennummer aus dem separaten Formular
+        // Bestellung in die Datenbank einfügen
+        $db->begin_transaction();
+        try {
+            $sqlBestellung = "INSERT INTO Bestellung (KNr, Datum) VALUES (?, NOW())";
+            $stmtBestellung = $db->prepare($sqlBestellung);
+            $stmtBestellung->bind_param("i", $kundennummer);
+            $stmtBestellung->execute();
+            $bestellId = $stmtBestellung->insert_id;
+
+            foreach ($_SESSION['warenkorb'] as $item) {
+                $sqlPosition = "INSERT INTO Position (ANr, BesNr, Anzahl) VALUES (?, ?, ?)";
+                $stmtPosition = $db->prepare($sqlPosition);
+                $stmtPosition->bind_param("iii", $item['produktId'], $bestellId, $item['menge']);
+                $stmtPosition->execute();
+            }
+
+            $db->commit();
+            displayWarenkorb(); // Zeige den Warenkorb mit der Bestellung an
+            $_SESSION['warenkorb'] = array();
+            $_SESSION['gesamtsumme'] = 0;
+            echo "<script>alert('Bestellung erfolgreich aufgegeben!'); window.location.reload();</script>";
+        } catch (Exception $e) {
+            $db->rollback();
+            echo "<script>alert('Fehler beim Bestellen: " . $e->getMessage() . "');</script>";
+        }
+    }
+}
+```
+
+### Funktion zur Anzeige des Warenkorbs
+
+Ich habe eine Funktion `displayWarenkorb` erstellt, um den aktuellen Inhalt des Warenkorbs anzuzeigen.
+
+```php
+function displayWarenkorb() {
+    if (!empty($_SESSION['warenkorb'])) {
+        echo "<h3>Warenkorb:</h3>";
+        echo "<ul>";
+        foreach ($_SESSION['warenkorb'] as $index => $item) {
+            echo "<li>Produkt ID: " . $item['produktId'] . ", Produktname: " . $item['Bezeichnung'] . ", Menge: " . $item['menge'] . ", Gesamt: " . $item['gesamt'] . "€ ";
+            echo "<form method='POST' style='display: inline;'><input type='hidden' name='index' value='$index'><input type='submit' name='entfernen' value='Entfernen'></form></li>";
+        }
+        echo "</ul>";
+        echo "<h3>Gesamtsumme: " . $_SESSION['gesamtsumme'] . "€</h3>";
+    }
+}
+?>
+```
+
+### HTML-Abschnitt: Grundstruktur
+
+Der HTML-Teil der Datei beginnt mit dem `<!DOCTYPE html>` Tag und setzt die Sprache auf Deutsch.
+
+```html
+<!DOCTYPE html>
+<html lang="de">
+```
+
+### HTML-Abschnitt: Kopfbereich (`<head>`)
+
+Im Kopfbereich setze ich den Zeichensatz auf UTF-8, definiere den Titel der Seite und binde eine CSS-Datei (`style.css`) ein.
+
+```html
+<head>
+    <meta charset="UTF-8">
+    <title>Produkt bestellen</title>
+    <script>
+        window.onload = function() {
+            <?php if ($productNotFound) { ?>
+            alert("Produkt nicht gefunden.");
+            <?php } ?>
+        };
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+```
+
+### HTML-Abschnitt: Körperbereich (`<body>`)
+
+Der Hauptteil der Seite beginnt mit dem `<body>` Tag.
+
+```html
+<body>
+```
+
+### Navigationsleiste (`<nav>`)
+
+Die Navigationsleiste ermöglicht es den Benutzern, zwischen verschiedenen Seiten der Website zu wechseln.
+
+```html
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">Smart GmbH</a>
+        </div>
+
+        <ul class="nav navbar-nav">
+            <li>
+                <a href="home.php">Home (Produkte)</a>
+            </li>
+            <li>
+                <a href="registrieren.php">Registrierung</a>
+            </li>
+            <li class="active">
+                <a href="bestellen.php">Bestellformular</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+```
+
+### Formular zur Produktauswahl
+
+Dieses Formular ermöglicht es den Benutzern, die Produkt-ID und die Menge einzugeben, um ein Produkt in den Warenkorb zu legen.
+
+```html
+<h1>Produkt bestellen</h1>
+
+<form method="POST">
+    <label for="produktId">Produkt ID:</label>
+    <input type="number" id="produktId" name="produktId" required><br>
+
+    <label for="menge">Menge:</label>
+    <input type="number" id="menge" name="menge" required><br>
+
+    <input type="submit" name="speichern" value="Speichern">
+</form>
+```
+
+### Formular zur Eingabe der Kundennummer
+
+Dieses Formular ermöglicht es den Benutzern, ihre Kundennummer einzugeben und die Bestellung abzuschließen.
+
+```html
+<form method="POST">
+    <label for="kundennummer">Kundennummer:</label>
+    <input type="number" id="kundennummer" name="kundennummer" required><br>
+
+    <input type="submit" name="bestellen" value="Bestellen" onclick="return confirm('Sind Sie sicher, dass Sie die Bestellung aufgeben möchten?');">
+</form>
+```
+
+### Warenkorb anzeigen
+
+Hier wird der aktuelle Inhalt des Warenkorbs angezeigt.
+
+```html
+<?php displayWarenkorb(); ?>
+```
+
+### Footer
+
+Der Footer enthält Informationen über
+
+ die Entwickler des Projekts.
+
+```html
+<footer>
+    <p>Developed by Gökdeniz and Ralf. Databank modelling by Adrian and Elias, Project Management by Natalie</p>
+</footer>
+</body>
+</html>
+```
+
+### Zusammenfassung
+
+Die `bestellen.php` Datei ermöglicht es den Benutzern, Produkte zu bestellen, indem sie eine Produkt-ID und Menge angeben, die dann im Warenkorb gespeichert werden. Die Seite zeigt den Warenkorb an, erlaubt das Entfernen von Produkten und das Abschließen der Bestellung. Die Bestellinformationen werden in der Datenbank gespeichert und die Session wird genutzt, um die Warenkorbdaten zu verwalten. Die Struktur der Datei ist so gestaltet, dass sie eine klare und benutzerfreundliche Oberfläche für die Bestellung von Produkten bietet.
