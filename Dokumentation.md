@@ -159,28 +159,42 @@ Diese Schritte dokumentieren, wie ich die Datenbank für den Online-Shop erstell
 Die Verbindung zur Datenbank wird in einer separaten Konfigurationsdatei eingerichtet. Diese Datei enthält die Zugangsdaten und stellt sicher, dass die Webseite auf die Datenbank zugreifen kann.
 
 ## dbConfig.php:
+Eine Konfigurationsdatei (`dbConfig.php`) wurde erstellt, um die Verbindung zur MySQL-Datenbank für die "Smart GmbH" Website zu verwalten. Diese Datei enthält wichtige Informationen zur Datenbankverbindung und stellt sicher, dass die Website mit der Datenbank kommunizieren kann.
+
+### PHP-Tag und Datenbankdetails
+Die Datei beginnt mit dem Öffnen des PHP-Tags. Danach werden die Details der Datenbankverbindung definiert, einschließlich des Hostnamens, des Benutzernamens, des Passworts und des Datenbanknamens. Da es sich um eine lokale Entwicklung handelt, bleibt das Passwortfeld leer.
+
 ```php
 <?php
-// DB details
-$dbHost = 'localhost';
-$dbUsername = 'root';
-$dbPassword = '';
-$dbName = 'shop';
+//DB details
+$dbHost = 'localhost'; // Link
+$dbUsername = 'root'; // Link
+$dbPassword = ''; // Ist Leer weil es im LocalHost ist
+$dbName = 'shop'; // Name der Datenbank
+```
 
+### Erstellen der Datenbankverbindung
+
+Im nächsten Schritt erstelle ich eine neue Verbindung zur MySQL-Datenbank mithilfe der `mysqli` Klasse und den zuvor definierten Verbindungsdetails.
+
+```php
 // Erschaffe eine Verbindung zur Datenbank
 $db = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
+```
 
-// Error Nachricht wenn keine Verbindung mit der Datenbank möglich war
+### Fehlerbehandlung
+
+Falls die Verbindung zur Datenbank fehlschlägt, gebe ich eine Fehlermeldung aus und beende das Skript. Dies wird durch die `connect_error` Eigenschaft der `mysqli` Klasse ermöglicht.
+
+```php
+// Error Nachricht wenn keine verbindung mit der Datenbank möglich war
 if ($db->connect_error) {
     die('Verbindung fehlgeschlagen: ' . $db->connect_error);
 }
 ?>
 ```
 
-### Webseite
-Die Webseite besteht aus mehreren HTML- und PHP-Dateien, die die verschiedenen Funktionen bereitstellen.
-
-#### index.html
+## index.html
 Dies ist die Startseite der Webseite. Sie enthält eine Navigation und eine Willkommensnachricht.
 
 ```html
