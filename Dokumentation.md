@@ -830,3 +830,225 @@ Der Footer enthält Informationen über
 </html>
 ```
 
+
+## style.css
+
+Hier is das Styling der Website der "Smart GmbH" definiert. Diese Datei enthält verschiedene CSS-Regeln, um das Layout und das Aussehen der HTML-Elemente zu gestalten. Hier ist eine detaillierte Erklärung des Codes.
+
+### Grundlegende Farbdefinitionen und Medienabfragen
+
+Zuerst definiere ich einige CSS-Variablen, um die Hintergrundfarbe und Textfarbe der Seite zu speichern. Diese Variablen ändern sich je nach dem bevorzugten Farbschema (hell oder dunkel) des Benutzers.
+
+```css
+:root {
+    --background-color: #F8F8F8;
+    --text-color: #0f0f0f;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #0f0f0f;
+        --text-color: #F8F8F8;
+    }
+}
+```
+
+### Allgemeine Stile
+
+Hier setze ich einige allgemeine Stile für alle HTML-Elemente, um ein einheitliches Erscheinungsbild zu gewährleisten.
+
+```css
+* {
+    box-sizing: border-box;
+}
+
+html {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    max-width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+    margin: 0;
+}
+```
+
+### Stile für Links
+
+Ich definiere das Aussehen von Links und füge Übergangseffekte hinzu, um das Benutzererlebnis zu verbessern.
+
+```css
+a {
+    text-decoration: none;
+    color: #b11a1a;
+    -webkit-transition: .5s ease;
+    transition: .5s ease;
+}
+```
+
+### Stile für Überschriften und Absätze
+
+Hier definiere ich die Stile für verschiedene Überschriften und Absätze, um die Textdarstellung auf der Seite zu verbessern.
+
+```css
+h1 {
+    text-align: center;
+    font-weight: 300;
+    margin: 0 0 40px;
+}
+
+h2 {
+    text-align: center;
+    font-weight: 1000;
+    margin: 0;
+}
+
+p {
+    text-align: center;
+    margin: 0px 0px 50px 0px;
+}
+```
+
+### Stile für die Navigationsleiste
+
+Ich gestalte die Navigationsleiste, um sie benutzerfreundlich und optisch ansprechend zu machen.
+
+```css
+.navbar {
+    width: 100%;
+    border-bottom: var(--text-color) 1px solid;
+    margin-bottom: 10vh;
+}
+
+.container-fluid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 8%;
+    padding-right: 8%;
+}
+
+.navbar-header {
+    flex-grow: 1;
+}
+
+.navbar-nav {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar-nav li {
+    padding: 10px;
+}
+
+.navbar-nav li a, .navbar-header a {
+    text-decoration: none;
+}
+
+.navbar-nav li a:hover, .navbar-header a:hover {
+    -webkit-filter: brightness(50%);
+    filter: brightness(50%);
+}
+
+.navbar-nav li.active a {
+    color: var(--text-color);
+}
+```
+
+### Container-Stile
+
+Der Container-Stil sorgt dafür, dass der Inhalt der Seite zentriert und gut lesbar ist.
+
+```css
+.container {
+    text-align: center;
+    padding-left: 10vw;
+    padding-right: 10vw;
+    max-width: 90vw;
+    margin: auto;
+    min-width: 70vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    border-radius: 20px;
+}
+```
+
+### Stile für Thumbnails und Produktbilder
+
+Hier definiere ich die Stile für Thumbnails und Produktbilder, um sicherzustellen, dass sie einheitlich und ansprechend aussehen.
+
+```css
+.thumbnail {
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 20%;
+}
+
+.product-image {
+    width: 80%;
+    height: 20vw;
+    border-radius: 10px;
+    margin-top: -6%;
+    margin-bottom: 15px;
+    object-fit: cover;
+    transition: all 0.2s ease-in;
+}
+
+.product-image:hover {
+    scale: 1.008;
+}
+```
+
+### Stile für das Layout der Seite
+
+Diese Regeln sorgen dafür, dass das Layout der Seite ansprechend und benutzerfreundlich ist.
+
+```css
+.row {
+    justify-content: center;
+    margin-top: 10vh;
+}
+
+.item {
+    margin-top: 20px;
+}
+
+.caption {
+    text-align: center;
+}
+```
+
+### Stile für Formulare
+
+Ich definiere die Stile für Formulare, um sicherzustellen, dass sie gut aussehen und einfach zu bedienen sind.
+
+```css
+form {
+    border-radius: 10px;
+    margin: 10px;
+    width: 90%;
+    padding: 20px;
+    max-height: 100%;
+    height: 98%;
+}
+
+input, label {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    padding: 1%;
+}
+```
+
+### Zusammenfassung
+
+Die `style.css` Datei definiert das visuelle Erscheinungsbild der "Smart GmbH" Website. Sie enthält CSS-Regeln für Farben, Layout, Typografie und verschiedene HTML-Elemente, um eine benutzerfreundliche und optisch ansprechende Website zu schaffen. Durch die Verwendung von CSS-Variablen und Medienabfragen wird sichergestellt, dass die Seite sowohl im hellen als auch im dunklen Modus gut aussieht. Die definierten Stile verbessern das Benutzererlebnis und sorgen für ein einheitliches und professionelles Design.
