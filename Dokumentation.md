@@ -349,7 +349,6 @@ Für jedes Produkt wird ein HTML-Block erstellt, der das Bild, die Bezeichnung, 
 ```
 
 ### Abschließende Tags und Footer
-
 Zum Schluss werden die `div`, `body` und `html` Tags geschlossen. Der Footer enthält Informationen über die Entwickler des Projekts.
 
 ```html
@@ -365,11 +364,9 @@ Zum Schluss werden die `div`, `body` und `html` Tags geschlossen. Der Footer ent
 ```
 
 ## registrieren.php
-
 registrieren.php` ermöglicht es Nutzern, sich auf unsere Website zu registrieren. Diese Seite enthält ein Formular zur Eingabe von Benutzerdaten und verarbeitet die Registrierungsinformationen, indem sie diese in eine Datenbank speichert. Hier ist eine Schritt-für-Schritt-Erklärung des Codes.
 
 ### PHP-Abschnitt: Einbinden der Datenbankkonfigurationsdatei
-
 Zuerst binde ich die Datei `dbConfig.php` ein, die die Konfigurationsdetails für die Datenbankverbindung enthält. Dies ermöglicht es, die Datenbankverbindung in dieser Datei zu nutzen.
 
 ```php
@@ -379,7 +376,6 @@ include "dbConfig.php"; // Datenbankkonfiguration einbinden
 ```
 
 ### Überprüfen, ob das Formular abgeschickt wurde
-
 Ich überprüfe, ob das Formular mit der POST-Methode abgeschickt wurde. Wenn dies der Fall ist, speichere ich die POST-Daten in Variablen.
 
 ```php
@@ -394,7 +390,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ```
 
 ### Überprüfen, ob der Benutzername oder die E-Mail bereits existieren
-
 Ich führe eine SQL-Abfrage aus, um zu überprüfen, ob der Vorname oder die E-Mail-Adresse bereits in der Tabelle `Kunde` existiert.
 
 ```php
@@ -413,7 +408,6 @@ Ich führe eine SQL-Abfrage aus, um zu überprüfen, ob der Vorname oder die E-M
 ```
 
 ### Überprüfen, ob die PLZ bereits existiert
-
 Ich überprüfe, ob die eingegebene PLZ bereits in der Tabelle `Ort` existiert. Wenn nicht, füge ich einen neuen Eintrag für die PLZ und den Ort hinzu.
 
 ```php
@@ -461,7 +455,6 @@ Ich füge die Anschrift in die Tabelle `Anschrift` ein und speichere die generie
 ```
 
 ### HTML-Abschnitt: Grundstruktur
-
 Der HTML-Teil der Datei beginnt mit dem `<!DOCTYPE html>` Tag und setzt die Sprache auf Deutsch.
 
 ```html
@@ -470,7 +463,6 @@ Der HTML-Teil der Datei beginnt mit dem `<!DOCTYPE html>` Tag und setzt die Spra
 ```
 
 ### HTML-Abschnitt: Kopfbereich (`<head>`)
-
 Im Kopfbereich setze ich den Zeichensatz auf UTF-8, definiere den Titel der Seite und binde eine CSS-Datei (`style.css`) ein.
 
 ```html
@@ -482,7 +474,6 @@ Im Kopfbereich setze ich den Zeichensatz auf UTF-8, definiere den Titel der Seit
 ```
 
 ### HTML-Abschnitt: Körperbereich (`<body>`)
-
 Der Hauptteil der Seite beginnt mit dem `<body>` Tag.
 
 ```html
@@ -490,7 +481,6 @@ Der Hauptteil der Seite beginnt mit dem `<body>` Tag.
 ```
 
 ### Navigationsleiste (`<nav>`)
-
 Die Navigationsleiste ermöglicht es den Benutzern, zwischen verschiedenen Seiten der Website zu wechseln.
 
 ```html
@@ -507,23 +497,72 @@ Die Navigationsleiste ermöglicht es den Benutzern, zwischen verschiedenen Seite
             <li class="active">
                 <a href="registrieren.php">Registrierung</a>
             </li>
-            <li
+            <li>
+                <a href="bestellen.php">Bestellformular</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+```
 
+### Formular zur Kundenregistrierung
 
+Das Formular ermöglicht es den Benutzern, ihre Registrierungsdaten einzugeben. Es enthält Felder für Vorname, Nachname, E-Mail, Straße, Hausnummer, PLZ und Ort.
 
+```html
+<h1>Kundenregistrierung</h1>
 
+<form method="POST">
+    <label for="vorname">Vorname:</label>
+    <input type="text" id="vorname" name="vorname" required><br>
 
+    <label for="nachname">Nachname:</label>
+    <input type="text" id="nachname" name="nachname" required><br>
 
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br>
 
+    <h2>Anschrift</h2>
+    <label for="strasse">Straße:</label>
+    <input type="text" id="strasse" name="strasse" required><br>
 
+    <label for="hausnummer">Hausnummer:</label>
+    <input type="number" id="hausnummer" name="hausnummer" required><br>
 
+    <label for="plz">PLZ:</label>
+    <input type="number" id="plz" name="plz" required><br>
 
+    <label for="ort">Ort:</label>
+    <input type="text" id="ort" name="ort" required><br>
 
+    <input type="submit" value="Registrieren">
+</form>
+```
 
+### Erfolgs- oder Fehlermeldungen anzeigen
 
+Wenn die Registrierung erfolgreich war oder ein Fehler aufgetreten ist, wird eine entsprechende Nachricht angezeigt und die Seite neu geladen.
 
+```html
+<?php if (isset($successMessage) || isset($errorMessage)): ?>
+    <script>
+        alert('<?php echo $successMessage ?? $errorMessage; ?>');
+        window.location.reload();
+    </script>
+<?php endif; ?>
+```
 
+### Footer
 
+Der Footer enthält Informationen über die Entwickler des Projekts.
+
+```html
+<footer>
+    <p>Developed by Gökdeniz and Ralf. Databank modelling by Adrian and Elias, Project Management by Natalie</p>
+</footer>
+</body>
+</html>
+```
 
 
 
