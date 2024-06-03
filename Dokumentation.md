@@ -2,19 +2,21 @@
 
 Projekt Strucktur:
 
-| _Datenbank.sql
-| _index.html
-| _home.php
-| _registrieren.php
-| _bestellen.php
-| _
-| _
-| _bilder
-      | _
-      | _
-      | _
-      | _
-      | _
+| _ Datenbank.sql
+| _ dbConfig.php
+| _ index.html
+| _ home.php
+| _ registrieren.php
+| _ bestellen.php
+| _ neues_produkt_einfügen.php
+| _ README.md
+| _ Dokumentation.md
+| _ bilder
+      | _ lamp.jpg
+      | _ lock.jpg
+      | _ plug.png
+      | _ speaker.jpg
+      | _ thermostat.jpg
 
 
 
