@@ -365,3 +365,178 @@ Zum Schluss werden die `div`, `body` und `html` Tags geschlossen. Der Footer ent
 ```
 
 ## registrieren.php
+
+registrieren.php` ermöglicht es Nutzern, sich auf unsere Website zu registrieren. Diese Seite enthält ein Formular zur Eingabe von Benutzerdaten und verarbeitet die Registrierungsinformationen, indem sie diese in eine Datenbank speichert. Hier ist eine Schritt-für-Schritt-Erklärung des Codes.
+
+### PHP-Abschnitt: Einbinden der Datenbankkonfigurationsdatei
+
+Zuerst binde ich die Datei `dbConfig.php` ein, die die Konfigurationsdetails für die Datenbankverbindung enthält. Dies ermöglicht es, die Datenbankverbindung in dieser Datei zu nutzen.
+
+```php
+<?php
+include "dbConfig.php"; // Datenbankkonfiguration einbinden
+?>
+```
+
+### Überprüfen, ob das Formular abgeschickt wurde
+
+Ich überprüfe, ob das Formular mit der POST-Methode abgeschickt wurde. Wenn dies der Fall ist, speichere ich die POST-Daten in Variablen.
+
+```php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $vorname = $_POST["vorname"];
+    $nachname = $_POST["nachname"];
+    $email = $_POST["email"];
+    $strasse = $_POST["strasse"];
+    $hausnummer = $_POST["hausnummer"];
+    $plz = $_POST["plz"];
+    $ort = $_POST["ort"];
+```
+
+### Überprüfen, ob der Benutzername oder die E-Mail bereits existieren
+
+Ich führe eine SQL-Abfrage aus, um zu überprüfen, ob der Vorname oder die E-Mail-Adresse bereits in der Tabelle `Kunde` existiert.
+
+```php
+    $sqlCheckUser = "SELECT * FROM Kunde WHERE Vorname = ? OR Email = ?";
+    $stmtCheckUser = $db->prepare($sqlCheckUser);
+    $stmtCheckUser->bind_param("ss", $vorname, $email);
+    $stmtCheckUser->execute();
+    $resultCheckUser = $stmtCheckUser->get_result();
+
+    if ($resultCheckUser->num_rows > 0) {
+        $errorMessage = "Der Benutzername oder die E-Mail-Adresse sind bereits vergeben. Bitte wählen Sie einen anderen Namen oder eine andere E-Mail.";
+    } else {
+        $db->autocommit(FALSE);
+
+        try {
+```
+
+### Überprüfen, ob die PLZ bereits existiert
+
+Ich überprüfe, ob die eingegebene PLZ bereits in der Tabelle `Ort` existiert. Wenn nicht, füge ich einen neuen Eintrag für die PLZ und den Ort hinzu.
+
+```php
+            $sqlCheckPLZ = "SELECT PLZ FROM Ort WHERE PLZ = ?";
+            $stmtCheckPLZ = $db->prepare($sqlCheckPLZ);
+            $stmtCheckPLZ->bind_param("i", $plz);
+            $stmtCheckPLZ->execute();
+            $resultCheckPLZ = $stmtCheckPLZ->get_result();
+
+            if ($resultCheckPLZ->num_rows === 0) {
+                $sqlInsertPLZ = "INSERT INTO Ort (PLZ, Name) VALUES (?, ?)";
+                $stmtInsertPLZ = $db->prepare($sqlInsertPLZ);
+                $stmtInsertPLZ->bind_param("is", $plz, $ort);
+                $stmtInsertPLZ->execute();
+            }
+```
+
+### Einfügen der Anschrift und Kundendaten in die Datenbank
+
+Ich füge die Anschrift in die Tabelle `Anschrift` ein und speichere die generierte ID. Anschließend füge ich die Kundendaten in die Tabelle `Kunde` ein und speichere die Kundennummer.
+
+```php
+            $sqlAnschrift = "INSERT INTO Anschrift (PLZ, Straße, Hausnummer) VALUES (?, ?, ?)";
+            $stmtAnschrift = $db->prepare($sqlAnschrift);
+            $stmtAnschrift->bind_param("iss", $plz, $strasse, $hausnummer);
+            $stmtAnschrift->execute();
+            $anschriftId = $db->insert_id;
+
+            $sqlKunde = "INSERT INTO Kunde (Vorname, Nachname, AnsID, Email) VALUES (?, ?, ?, ?)";
+            $stmtKunde = $db->prepare($sqlKunde);
+            $stmtKunde->bind_param("ssis", $vorname, $nachname, $anschriftId, $email);
+            $stmtKunde->execute();
+            $kundennummer = $db->insert_id;
+
+            $db->commit();
+
+            $successMessage = "Registrierung erfolgreich! Ihre Kundennummer lautet: $kundennummer. Bitte notieren Sie sich diese ID-Nummer.";
+        } catch (Exception $e) {
+            $db->rollback();
+            $errorMessage = "Fehler beim Registrieren: " . $e->getMessage();
+        }
+    }
+}
+?>
+```
+
+### HTML-Abschnitt: Grundstruktur
+
+Der HTML-Teil der Datei beginnt mit dem `<!DOCTYPE html>` Tag und setzt die Sprache auf Deutsch.
+
+```html
+<!DOCTYPE html>
+<html lang="de">
+```
+
+### HTML-Abschnitt: Kopfbereich (`<head>`)
+
+Im Kopfbereich setze ich den Zeichensatz auf UTF-8, definiere den Titel der Seite und binde eine CSS-Datei (`style.css`) ein.
+
+```html
+<head>
+    <meta charset="UTF-8">
+    <title>Registrieren</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+```
+
+### HTML-Abschnitt: Körperbereich (`<body>`)
+
+Der Hauptteil der Seite beginnt mit dem `<body>` Tag.
+
+```html
+<body>
+```
+
+### Navigationsleiste (`<nav>`)
+
+Die Navigationsleiste ermöglicht es den Benutzern, zwischen verschiedenen Seiten der Website zu wechseln.
+
+```html
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">Smart GmbH</a>
+        </div>
+
+        <ul class="nav navbar-nav">
+            <li>
+                <a href="home.php">Home (Produkte)</a>
+            </li>
+            <li class="active">
+                <a href="registrieren.php">Registrierung</a>
+            </li>
+            <li
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
