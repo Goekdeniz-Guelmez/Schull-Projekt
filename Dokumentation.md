@@ -155,95 +155,10 @@ VALUES (0, "admin", "admin", "admin@gmail.com");
 
 Diese Schritte dokumentieren, wie ich die Datenbank für den Online-Shop erstellt habe. Jede Tabelle wurde sorgfältig geplant und erstellt, um eine konsistente und effiziente Datenverwaltung zu gewährleisten. Die Verwendung von Fremdschlüsseln stellt sicher, dass die Datenintegrität über die verschiedenen Tabellen hinweg gewahrt bleibt.
 
-
-
-
-
-
-
-## Dokumentation für das Schulprojekt: Fiktive Shopping-Seite
-
-### Projektübersicht
-Für mein Schulprojekt habe ich eine fiktive Shopping-Seite erstellt, die es Nutzern ermöglicht, Produkte anzusehen, sich zu registrieren und Bestellungen aufzugeben. Die Webseite wurde mithilfe von HTML, CSS und PHP entwickelt und nutzt eine MySQL-Datenbank zur Verwaltung der Daten. Im Folgenden beschreibe ich die Implementierung der verschiedenen Komponenten der Webseite.
-
-### Datenbankstruktur
-Die Datenbank für das Projekt enthält mehrere Tabellen zur Verwaltung von Kunden, Produkten, Bestellungen und Adressen. Die Datenbank wird mit dem folgenden Skript erstellt:
-
-#### Database.sql:
-```sql
-DROP DATABASE IF EXISTS shop;
-CREATE DATABASE shop;
-
-USE shop;
-
-CREATE TABLE IF NOT EXISTS Ort (
-    PLZ int(11) NOT NULL,
-    Name varchar(100) NOT NULL,
-    PRIMARY KEY (PLZ, Name)
-);
-
-CREATE TABLE IF NOT EXISTS Anschrift (
-    AnsID int(11) NOT NULL AUTO_INCREMENT,
-    PLZ int(11),
-    Straße varchar(100) NOT NULL,
-    Hausnummer int(11) NOT NULL,
-    PRIMARY KEY (AnsID),
-    FOREIGN KEY (PLZ) REFERENCES Ort(PLZ)
-);
-
-CREATE TABLE IF NOT EXISTS Kunde (
-    KNr int(11) NOT NULL AUTO_INCREMENT,
-    Vorname varchar(100) NOT NULL,
-    Nachname varchar(100) NOT NULL,
-    AnsID int(11),
-    Email varchar(100) NOT NULL,
-    PRIMARY KEY (KNr),
-    FOREIGN KEY (AnsID) REFERENCES Anschrift(AnsID)
-);
-
-CREATE TABLE IF NOT EXISTS Artikel (
-    ANr int(11) NOT NULL AUTO_INCREMENT,
-    Bezeichnung varchar(100) NOT NULL,
-    Beschreibung varchar(1000),
-    Preis double(10,2) NOT NULL,
-    Bild varchar(255),
-    PRIMARY KEY (ANr)
-);
-
-CREATE TABLE IF NOT EXISTS Bestellung (
-    BesNr int(11) NOT NULL AUTO_INCREMENT,
-    KNr int(11),
-    Datum datetime NOT NULL,
-    PRIMARY KEY (BesNr),
-    FOREIGN KEY (KNr) REFERENCES Kunde(KNr)
-);
-
-CREATE TABLE IF NOT EXISTS Position (
-    BesPos int(11) NOT NULL AUTO_INCREMENT,
-    ANr int(11),
-    BesNr int(11),
-    Anzahl int(11) NOT NULL,
-    PRIMARY KEY (BesPos),
-    FOREIGN KEY (ANr) REFERENCES Artikel(ANr),
-    FOREIGN KEY (BesNr) REFERENCES Bestellung(BesNr)
-);
-
-INSERT INTO artikel (ANr, Bezeichnung, Beschreibung, Preis, Bild)
-VALUES 
-(001, "Smart Speaker", "Der Echo Studio kombiniert High-Fidelity-Klang mit den Funktionen von verschiedenen Sprachsteuerungen. Mit seinem 3D-Klangsystem füllt er den Raum mit beeindruckendem Sound. Dank der Sprachsteuerung können Benutzer per Sprachbefehl Musik abspielen, Fragen stellen und Smart-Home-Geräte steuern. Der Echo Studio passt sich automatisch an die Raumakustik an und bietet so stets optimalen Klang. Ideal für Audiophile und Smart-Home-Enthusiasten.", 49.99, "../bilder/speaker.jpg"),
-(002, "Smart Plug", "Der Mini Smart Plug ermöglicht die Fernsteuerung angeschlossener Geräte über das Internet. Mit der zugehörigen App können Sie Geräte ein- und ausschalten, Zeitpläne erstellen und den Energieverbrauch überwachen.",33.13, "../bilder/plug.png"),
-(003, "Smart Lock", "Der Wi-Fi Smart Lock ermöglicht die sichere Steuerung Ihrer Tür von überall aus über das Internet. Mit der zugehörigen App können Sie die Tür verriegeln und entriegeln, virtuelle Schlüssel verwalten und Aktivitätsprotokolle überprüfen.", 159.99, "../bilder/lock.jpg"),
-(004, "Smart Lamp", "Die Smart Lamp bietet eine einfache Möglichkeit, Ihre Beleuchtung zu automatisieren und zu steuern. Über die Philips Hue-App können Sie die Lampe ein- und ausschalten, Helligkeit und Farbtemperatur anpassen sowie Zeitpläne festlegen.", 14.99, "../bilder/lamp.jpg"),
-(005, "Smart Thermostat", "Das Smart Thermostat ermöglicht die intelligente Steuerung Ihrer Heizung und Kühlung von überall aus über das Internet. Mit der zugehörigen App können Sie die Temperatur einstellen, Zeitpläne programmieren und Energieverbrauchsberichte anzeigen.", 39.99, "../bilder/thermostat.jpg");
-
-INSERT INTO Kunde(KNr, Vorname, Nachname, Email)
-VALUES (0, "admin", "admin", "admin@gmail.com");
-```
-
 ### Datenbankkonfiguration
 Die Verbindung zur Datenbank wird in einer separaten Konfigurationsdatei eingerichtet. Diese Datei enthält die Zugangsdaten und stellt sicher, dass die Webseite auf die Datenbank zugreifen kann.
 
-#### dbConfig.php:
+## dbConfig.php:
 ```php
 <?php
 // DB details
