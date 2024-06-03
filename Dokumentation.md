@@ -233,53 +233,135 @@ Dies ist die Startseite der Webseite. Sie enthält eine Navigation und eine Will
 </html>
 ```
 
-#### home.php
+## home.php
 Diese Datei zeigt die verfügbaren Produkte an. Sie ruft die Produktdaten aus der Datenbank ab und zeigt sie in einer strukturierten Liste an.
+
+### PHP-Abschnitt: Einbinden der Datenbankkonfigurationsdatei
+Zu Beginn des PHP-Codes binde ich die Datei `dbConfig.php` ein, die die Konfigurationsdetails für die Datenbankverbindung enthält. Dies ermöglicht es, die Datenbankverbindung in dieser Datei zu nutzen.
 
 ```php
 <?php
 include "dbConfig.php"; // Einbinden der Datenbankkonfigurationsdatei
 ?>
+```
 
+### HTML-Abschnitt: Grundstruktur
+Der HTML-Teil der Datei beginnt mit dem `<!DOCTYPE html>` Tag, um den Browser anzuweisen, das Dokument als HTML5 zu interpretieren.
+
+```html
 <!DOCTYPE html>
 <html lang="de">
+```
+
+### HTML-Abschnitt: Kopfbereich (`<head>`)
+Im Kopfbereich der Seite setze ich den Zeichensatz auf UTF-8 und definiere den Titel der Seite. Außerdem binde ich eine CSS-Datei (`style.css`) ein, um das Styling der Seite zu ermöglichen. Das `meta`-Tag `viewport` sorgt dafür, dass die Seite auf verschiedenen Geräten gut aussieht.
+
+```html
 <head>
     <meta charset="utf8">
     <title>Smarthome Produkte - Smart GmBH</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
 </head>
+```
+
+### HTML-Abschnitt: Körperbereich (`<body>`)
+
+Der Hauptteil der Seite beginnt mit dem `<body>` Tag.
+
+```html
 <body>
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="index.html">Smart GmbH</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li class="active">
-                    <a href="home.php">Home (Produkte)</a>
-                </li>
-                <li>
-                    <a href="registrieren.php">Registrierung</a>
-                </li>
-                <li>
-                    <a href="bestellen.php">Bestellformular</a>
-                </li>
-            </ul>
+```
+
+### Navigationsleiste (`<nav>`)
+
+Die Navigationsleiste ermöglicht es den Benutzern, zwischen verschiedenen Seiten der Website zu wechseln. Sie enthält Links zur Startseite (`index.html`), zur Registrierung (`registrieren.php`) und zum Bestellformular (`bestellen.php`).
+
+```html
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">Smart GmbH</a>
         </div>
-    </nav>
-    <div class="container">
-        <h1>Unsere Produkte</h1>
-        <br>
-        <div id="products" class="row list-group">
-        <?php
-        $query = $db->query("SELECT * FROM Artikel ORDER BY ANr LIMIT 10");
-        if ($query->num_rows > 0) {
-            while ($row = $query->fetch_assoc()) { ?>
-        <div class="item col-lg-4">
-            <div class="thumbnail">
-                <img src="<?php echo $row["Bild"]; ?>" alt="<?php echo htmlspecialchars($row["Bild"]); ?>" class="product-image">
-                <div class="caption">
-                    <h4 class="list-group-item-heading"><?php echo htmlspecialchars($row["Bezeichnung"]); ?></h4>
-                    <p class="list-group-item-text" style="padding-bottom:10px"><?php echo htmlspecialchars($row["Beschreibung"]); ?></p>
-                    <h3 class="list-group-item-heading">
+
+        <ul class="nav navbar-nav">
+            <li class="active">
+                <a href="home.php">Home (Produkte)</a>
+            </li>
+            <li>
+                <a href="registrieren.php">Registrierung</a>
+            </li>
+            <li>
+                <a href="bestellen.php">Bestellformular</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+```
+
+### Hauptinhalt: Produkte anzeigen
+
+In diesem Abschnitt werden die Produkte aus der Datenbank abgerufen und angezeigt. 
+
+```html
+<div class="container">
+    <h1>Unsere Produkte</h1>
+    <br>
+
+    <div id="products" class="row list-group">
+```
+
+### PHP-Abschnitt: Datenbankabfrage und Produktanzeige
+
+Hier wird eine SQL-Abfrage ausgeführt, um die Produkte aus der Tabelle `Artikel` abzurufen. Die Ergebnisse der Abfrage werden in einer Schleife durchlaufen und angezeigt.
+
+```php
+<?php
+$query = $db->query("SELECT * FROM Artikel ORDER BY ANr LIMIT 10");
+
+if ($query->num_rows > 0) {
+    while ($row = $query->fetch_assoc()) { ?>
+```
+
+Für jedes Produkt wird ein HTML-Block erstellt, der das Bild, die Bezeichnung, die Beschreibung, die Produkt-ID und den Preis enthält. 
+
+```html
+<div class="item col-lg-4">
+    <div class="thumbnail">
+        <img src="<?php echo $row['Bild']; ?>" alt="<?php echo htmlspecialchars($row['Bild']); ?>" class="product-image">
+        <div class="caption">
+            <h4 class="list-group-item-heading"><?php echo htmlspecialchars($row['Bezeichnung']); ?></h4>
+            <p class="list-group-item-text" style="padding-bottom:10px"><?php echo htmlspecialchars($row['Beschreibung']); ?></p>
+            <h3 class="list-group-item-heading">Produkt ID: <?php echo htmlspecialchars($row['ANr']); ?></h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="lead"><?php echo $row['Preis'] . ' €'; ?></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?php }
+} else { ?>
+<p>Produkte wurden nicht gefunden.</p>
+<?php }
+?>
+```
+
+### Abschließende Tags und Footer
+
+Zum Schluss werden die `div`, `body` und `html` Tags geschlossen. Der Footer enthält Informationen über die Entwickler des Projekts.
+
+```html
+    </div>
+    
+    <!-- Footer Sektion -->
+    <footer>
+        <p>Developed by Gökdeniz and Ralf. Databank modelling by Adrian and Elias, Project Management by Natalie</p>
+    </footer>
+
+</body>
+</html>
+```
+
+## registrieren.php
