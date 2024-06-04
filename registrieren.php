@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $ort = $_POST["ort"];
 
     // Überprüfen, ob der Benutzername oder die E-Mail bereits existieren
-    $sqlCheckUser = "SELECT * FROM Kunde WHERE Vorname = ? OR Email = ?";
+    $sqlCheckUser = "SELECT * FROM Kunde WHERE Vorname = ? AND Nachname = ? AND Email = ?";
     $stmtCheckUser = $db->prepare($sqlCheckUser);
     $stmtCheckUser->bind_param("ss", $vorname, $email);
     $stmtCheckUser->execute();
