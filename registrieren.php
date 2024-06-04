@@ -74,6 +74,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Fehlermeldung festlegen
             $errorMessage = "Fehler beim Registrieren: " . $e->getMessage();
         }
+
+        // JavaScript in PHP-echo einfügen, um das Alert und das Neuladen zu steuern
+        echo "<script>alert('" . addslashes($alertMessage) . "'); window.location = 'registrieren.php';</script>";
+        exit; // Weitere Ausführung stoppen, um sicherzustellen, dass das JavaScript ausgeführt wird
     }
 }
 ?>
