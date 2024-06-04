@@ -23,62 +23,63 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Wenn der Benutzername oder die E-Mail bereits existieren, Fehlermeldung anzeigen
     if ($resultCheckUser->num_rows > 0) {
         $errorMessage = "Der Benutzername oder die E-Mail-Adresse sind bereits vergeben. Bitte wählen Sie einen anderen Namen oder eine andere E-Mail.";
-    } else {
-        // Automatische Commit-Funktion der Datenbank deaktivieren
-        $db->autocommit(FALSE);
+        } else {
+            // Automatische Commit-Funktion der Datenbank deaktivieren
+            $db->autocommit(FALSE);
 
-        try {
-            // Überprüfen, ob die eingegebene PLZ bereits in der Datenbank existiert
-            $sqlCheckPLZ = "SELECT PLZ FROM Ort WHERE PLZ = ?";
-            // Diese Methode bereitet eine SQL-Anweisung zur Ausführung vor. Sie schützt die Anwendung vor SQL-Injection-Angriffen, indem sie Platzhalter (?) in der SQL-Abfrage verwendet, die später mit den tatsächlichen Werten ersetzt werden.
-            $stmtCheckPLZ = $db->prepare($sqlCheckPLZ);
-            // Diese Methode bindet die tatsächlichen Werte an die Platzhalter in der vorbereiteten SQL-Anweisung. Sie nimmt die Datentypen und die entsprechenden Variablen als Parameter und sorgt dafür, dass die Werte richtig in die SQL-Anweisung eingefügt werden. Die Datentypen sind:
-            // i für Integer
-            // d für Double
-            // s für String
-            // b für Blob
-            $stmtCheckPLZ->bind_param("i", $plz); 
-            $stmtCheckPLZ->execute(); # Diese Methode führt die vorbereitete und gebundene SQL-Anweisung aus. Nach dem Binden der Parameter wird die Abfrage an die Datenbank gesendet und ausgeführt.
-            $resultCheckPLZ = $stmtCheckPLZ->get_result(); // Holt das Ergebnis der Abfrage, falls diese Daten zurückgibt.
+            try {
+                // Überprüfen, ob die eingegebene PLZ bereits in der Datenbank existiert
+                $sqlCheckPLZ = "SELECT PLZ FROM Ort WHERE PLZ = ?";
+                // Diese Methode bereitet eine SQL-Anweisung zur Ausführung vor. Sie schützt die Anwendung vor SQL-Injection-Angriffen, indem sie Platzhalter (?) in der SQL-Abfrage verwendet, die später mit den tatsächlichen Werten ersetzt werden.
+                $stmtCheckPLZ = $db->prepare($sqlCheckPLZ);
+                // Diese Methode bindet die tatsächlichen Werte an die Platzhalter in der vorbereiteten SQL-Anweisung. Sie nimmt die Datentypen und die entsprechenden Variablen als Parameter und sorgt dafür, dass die Werte richtig in die SQL-Anweisung eingefügt werden. Die Datentypen sind:
+                // i für Integer
+                // d für Double
+                // s für String
+                // b für Blob
+                $stmtCheckPLZ->bind_param("i", $plz); 
+                $stmtCheckPLZ->execute(); # Diese Methode führt die vorbereitete und gebundene SQL-Anweisung aus. Nach dem Binden der Parameter wird die Abfrage an die Datenbank gesendet und ausgeführt.
+                $resultCheckPLZ = $stmtCheckPLZ->get_result(); // Holt das Ergebnis der Abfrage, falls diese Daten zurückgibt.
 
-            // Wenn die PLZ nicht existiert, einen neuen Eintrag für PLZ und Ort hinzufügen
-            if ($resultCheckPLZ->num_rows === 0) {
-                $sqlInsertPLZ = "INSERT INTO Ort (PLZ, Name) VALUES (?, ?)";
-                $stmtInsertPLZ = $db->prepare($sqlInsertPLZ);
-                $stmtInsertPLZ->bind_param("is", $plz, $ort); // 'Ort' und 'PLZ' in die Einfügeoperation einbinden
-                $stmtInsertPLZ->execute();
+                // Wenn die PLZ nicht existiert, einen neuen Eintrag für PLZ und Ort hinzufügen
+                if ($resultCheckPLZ->num_rows === 0) {
+                    $sqlInsertPLZ = "INSERT INTO Ort (PLZ, Name) VALUES (?, ?)";
+                    $stmtInsertPLZ = $db->prepare($sqlInsertPLZ);
+                    $stmtInsertPLZ->bind_param("is", $plz, $ort); // 'Ort' und 'PLZ' in die Einfügeoperation einbinden
+                    $stmtInsertPLZ->execute();
+                }
+
+                // Anschrift in die Datenbank einfügen
+                $sqlAnschrift = "INSERT INTO Anschrift (PLZ, Straße, Hausnummer) VALUES (?, ?, ?)";
+                $stmtAnschrift = $db->prepare($sqlAnschrift);
+                $stmtAnschrift->bind_param("iss", $plz, $strasse, $hausnummer);
+                $stmtAnschrift->execute();
+                $anschriftId = $db->insert_id; // Die ID der eingefügten Anschrift speichern
+
+                // Kundendaten in die Datenbank einfügen
+                $sqlKunde = "INSERT INTO Kunde (Vorname, Nachname, AnsID, Email) VALUES (?, ?, ?, ?)";
+                $stmtKunde = $db->prepare($sqlKunde);
+                $stmtKunde->bind_param("ssis", $vorname, $nachname, $anschriftId, $email);
+                $stmtKunde->execute();
+                $kundennummer = $db->insert_id; // Die Kundennummer speichern
+
+                // Alle Änderungen in der Datenbank festschreiben
+                $db->commit();
+
+                // Erfolgsnachricht festlegen
+                $successMessage = "Registrierung erfolgreich! Ihre Kundennummer lautet: $kundennummer. Bitte notieren sie sich diese ID nummer.";
+                echo "<script>alert('" . htmlspecialchars($successMessage) . "'); window.location = 'registrieren.php';</script>";
+                exit;
+            } catch (Exception $e) {
+                // Bei einem Fehler alle Änderungen rückgängig machen
+                $db->rollback();
+                // Fehlermeldung festlegen
+                $errorMessage = "Fehler beim Registrieren: " . $e->getMessage();
+                echo "<script>alert('" . htmlspecialchars($errorMessage) . "'); window.location = 'registrieren.php';</script>";
+                exit;
             }
-
-            // Anschrift in die Datenbank einfügen
-            $sqlAnschrift = "INSERT INTO Anschrift (PLZ, Straße, Hausnummer) VALUES (?, ?, ?)";
-            $stmtAnschrift = $db->prepare($sqlAnschrift);
-            $stmtAnschrift->bind_param("iss", $plz, $strasse, $hausnummer);
-            $stmtAnschrift->execute();
-            $anschriftId = $db->insert_id; // Die ID der eingefügten Anschrift speichern
-
-            // Kundendaten in die Datenbank einfügen
-            $sqlKunde = "INSERT INTO Kunde (Vorname, Nachname, AnsID, Email) VALUES (?, ?, ?, ?)";
-            $stmtKunde = $db->prepare($sqlKunde);
-            $stmtKunde->bind_param("ssis", $vorname, $nachname, $anschriftId, $email);
-            $stmtKunde->execute();
-            $kundennummer = $db->insert_id; // Die Kundennummer speichern
-
-            // Alle Änderungen in der Datenbank festschreiben
-            $db->commit();
-
-            // Erfolgsnachricht festlegen
-            $successMessage = "Registrierung erfolgreich! Ihre Kundennummer lautet: $kundennummer. Bitte notieren sie sich diese ID nummer.";
-        } catch (Exception $e) {
-            // Bei einem Fehler alle Änderungen rückgängig machen
-            $db->rollback();
-            // Fehlermeldung festlegen
-            $errorMessage = "Fehler beim Registrieren: " . $e->getMessage();
         }
     }
-    // JavaScript in PHP-echo einfügen, um das Alert und das Neuladen zu steuern
-    echo "<script>alert('" . addslashes($alertMessage) . "'); window.location = 'registrieren.php';</script>";
-    exit; // Weitere Ausführung stoppen, um sicherzustellen, dass das JavaScript ausgeführt wird
-}
 ?>
 
 
