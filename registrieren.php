@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Überprüfen, ob der Benutzername oder die E-Mail bereits existieren
     $sqlCheckUser = "SELECT * FROM Kunde WHERE Vorname = ? AND Nachname = ? AND Email = ?";
     $stmtCheckUser = $db->prepare($sqlCheckUser);
-    $stmtCheckUser->bind_param("ss", $vorname, $email);
+    $stmtCheckUser->bind_param("sss", $nachname, $vorname, $email);
     $stmtCheckUser->execute();
     $resultCheckUser = $stmtCheckUser->get_result();
 
@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if ($resultCheckPLZ->num_rows === 0) {
                     $sqlInsertPLZ = "INSERT INTO Ort (PLZ, Name) VALUES (?, ?)";
                     $stmtInsertPLZ = $db->prepare($sqlInsertPLZ);
-                    $stmtInsertPLZ->bind_param("is", $plz, $ort); // 'Ort' und 'PLZ' in die Einfügeoperation einbinden
+                    $stmtAnschrift->bind_param("iss", $plz, $strasse, $hausnummer); // 'Ort', 'PLZ' und 'HausNr' in die Einfügeoperation einbinden
                     $stmtInsertPLZ->execute();
                 }
 
