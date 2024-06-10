@@ -3,38 +3,40 @@
 Montag
 datenbank erstellt
 
-project liste php seite erstellt
+home php seite erstellt
+registrierung php seite erstellt
+dbconfig php erstellt
 style css erstellt
 
 
 Dienstag
-project liste php seite weiterbearbeitet
-style css weiterbearbeitet
+home php seite weiterbearbeitet (zeigt di von produkt an und neues layout)
+style css weiterbearbeitet (automatisches dark mode und neue farben und layout)
 
 
 Donnerstag
-registrierung php seite erstellt
-project liste php seite weiterbearbeitet
+registrierung php seite weiterbearbeitet
+home php seite weiterbearbeitet
 style css weiterbearbeitet
 my sql datenbank code erneuert (admin account hinzugefügt und 10.4 zu 10.2 gestellt)
 
 
 Freitag
 registrierung php seite weiterbearbeitet
-project liste php seite weiterbearbeitet
+home php seite weiterbearbeitet
 style css weiterbearbeitet
 
 
 Samstag
 bestellungformula php seite erstellt
-project liste, registrierung php seiten weiterbearbeitet
+home, registrierung php seiten weiterbearbeitet
 style css weiterbearbeitet
 landing page html erstellt
 
 
 12 Mai
 Mittwoch und Freitag
-project liste, registrierung, bestellungformula php seiten weiterbearbeitet
+home, registrierung, bestellungformula php seiten weiterbearbeitet
 produkt hinzufügen php erstellt
 style css weiterbearbeitet
 landing page html weiterbearbeitet
@@ -42,7 +44,7 @@ landing page html weiterbearbeitet
 
 2.Juni
 Montag und Dienstag
-project liste, registrierung, bestellungformula php seiten weiterbearbeitet
+home, registrierung, bestellungformula php seiten weiterbearbeitet
 style css weiterbearbeitet
 landing page html weiterbearbeitet
 
