@@ -1,54 +1,66 @@
-5 Mai
+woche ab 5 Mai
 
-Montag
+Montag Schule
 datenbank erstellt
-
 home php seite erstellt
 registrierung php seite erstellt
 dbconfig php erstellt
 style css erstellt
 
-
-Dienstag
+Dienstag (10:00 - 11:00)
 home php seite weiterbearbeitet (zeigt di von produkt an und neues layout)
 style css weiterbearbeitet (automatisches dark mode und neue farben und layout)
 
+Donnerstag (16:00 - 19:15)
+registrierung php seite weiterbearbeitet (checken ob plz schon exisitiert damit datenbank speicher gespaart wird)
+home php seite weiterbearbeitet (Fotos hinzugefügt)
+style css weiterbearbeitet (nav nach oben getan und footer nach unten getan)
+Orner mit fotos hinzu gefügt und alle fotos ubenannt damit leichter für die datenbank.
+my sql datenbank code erneuert (admin account hinzugefügt,
+preise von produkten von 10.4 zu 10.2 gestellt,
+pfaht der fotos in die datenbank einfegügt)
+Dokumentiert
 
-Donnerstag
-registrierung php seite weiterbearbeitet
-home php seite weiterbearbeitet
-style css weiterbearbeitet
-my sql datenbank code erneuert (admin account hinzugefügt und 10.4 zu 10.2 gestellt)
-
-
-Freitag
-registrierung php seite weiterbearbeitet
-home php seite weiterbearbeitet
-style css weiterbearbeitet
-
-
-Samstag
+Freitag (16:00 - 19:15)
+registrierung php seite weiterbearbeitet (checkt ob input admin daten sind und ob name und email schin exisitiert)
 bestellungformula php seite erstellt
-home, registrierung php seiten weiterbearbeitet
-style css weiterbearbeitet
+Dokumentiert
+
+Samstag (12:00 - 14:00)
+registrierung, bestellungformula php seiten weiterbearbeitet:
+    bestellungformula (checkt ob eingegeben von produkt id exisitiert und gleiche mit kunden id)
+    registrierung (checkt jetzt ob vor und nachname und email schin exisitiert und gleiche mit plz und ort)
 landing page html erstellt
 
 
-12 Mai
-Mittwoch und Freitag
-home, registrierung, bestellungformula php seiten weiterbearbeitet
-produkt hinzufügen php erstellt
-style css weiterbearbeitet
-landing page html weiterbearbeitet
 
 
-2.Juni
-Montag und Dienstag
-home, registrierung, bestellungformula php seiten weiterbearbeitet
-style css weiterbearbeitet
-landing page html weiterbearbeitet
+woche ab 12 Mai
+Mittwoch (16:00 - 18:00)
+home, bestellungformula php seiten weiterbearbeitet
+    home (wenn es keine produkte in der datenbank gibt zeigt er "keine produkte gefunden" an)
+style css weiterbearbeitet (div centering)
+landing page html weiterbearbeitet (neues layout)
+
+Freitag (15:00 - 19:15)
+bestellungformula php seiten weiterbearbeitet (habe bei eingegeben produkt daten ein spechern button hinzu gefügt so das der user mehrere produkte bestellen kann (also wahren korp hinzu gefügt))
+produkt_hinzufügen php erstellt
+Dokumentiert
 
 
-9.juni
-Montag
-registrierung php seiten weiterbearbeitet
+
+
+woche ab 2.Juni
+Montag (10:00 - 12:00)
+registrierung, bestellungformula php seiten weiterbearbeitet (debugging von den test cases)
+
+Dienstag
+Dokumentiert
+
+
+
+
+woche ab 9.juni
+Montag (15:00 - 15:30)
+registrierung php seiten weiterbearbeitet (debugging von den test cases)
+Dokumentiert
