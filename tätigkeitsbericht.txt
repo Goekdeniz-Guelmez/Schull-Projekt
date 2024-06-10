@@ -1,0 +1,50 @@
+5 Mai
+
+Montag
+datenbank erstellt
+
+project liste php seite erstellt
+style css erstellt
+
+
+Dienstag
+project liste php seite weiterbearbeitet
+style css weiterbearbeitet
+
+
+Donnerstag
+registrierung php seite erstellt
+project liste php seite weiterbearbeitet
+style css weiterbearbeitet
+
+
+Freitag
+registrierung php seite weiterbearbeitet
+project liste php seite weiterbearbeitet
+style css weiterbearbeitet
+
+
+Samstag
+bestellungformula php seite erstellt
+project liste, registrierung php seiten weiterbearbeitet
+style css weiterbearbeitet
+landing page html erstellt
+
+
+12 Mai
+Mittwoch und Freitag
+project liste, registrierung, bestellungformula php seiten weiterbearbeitet
+style css weiterbearbeitet
+landing page html weiterbearbeitet
+
+
+2.Juni
+Montag und Dienstag
+project liste, registrierung, bestellungformula php seiten weiterbearbeitet
+style css weiterbearbeitet
+landing page html weiterbearbeitet
+
+
+9.juni
+Montag
+registrierung php seiten weiterbearbeitet
