@@ -16,6 +16,7 @@ Donnerstag
 registrierung php seite erstellt
 project liste php seite weiterbearbeitet
 style css weiterbearbeitet
+my sql datenbank code erneuert (admin account hinzugefügt und 10.4 zu 10.2 gestellt)
 
 
 Freitag
@@ -34,6 +35,7 @@ landing page html erstellt
 12 Mai
 Mittwoch und Freitag
 project liste, registrierung, bestellungformula php seiten weiterbearbeitet
+produkt hinzufügen php erstellt
 style css weiterbearbeitet
 landing page html weiterbearbeitet
 
