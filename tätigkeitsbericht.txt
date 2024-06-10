@@ -1,74 +1,65 @@
-woche ab 5 Mai
+### Woche ab dem 5. Mai
 
-Montag Schule
-datenbank erstellt
-home php seite erstellt
-registrierung php seite erstellt
-dbconfig php erstellt
-style css erstellt
+**Montag: (in der Schule (2 Schulstunden))**
+- Datenbank erstellt
+- Homepage (PHP) erstellt
+- Registrierungsseite (PHP) erstellt
+- DB-Konfigurationsdatei (PHP) erstellt
+- CSS-Stylesheet erstellt
 
-Dienstag (10:00 - 11:00)
-home php seite weiterbearbeitet (zeigt di von produkt an und neues layout)
-style css weiterbearbeitet (automatisches dark mode und neue farben und layout)
+**Dienstag (10:00 - 11:00):**
+- Weiterarbeit an der Homepage (PHP) (Produktanzeige und neues Layout)
+- Weiterarbeit am CSS-Stylesheet (automatischer Dark Mode, neue Farben und Layout)
 
-Donnerstag (16:00 - 19:15)
-registrierung php seite weiterbearbeitet (checken ob plz schon exisitiert damit datenbank speicher gespaart wird)
-home php seite weiterbearbeitet (Fotos hinzugefügt)
-style css weiterbearbeitet (nav nach oben getan und footer nach unten getan)
-Orner mit fotos hinzu gefügt und alle fotos ubenannt damit leichter für die datenbank.
-my sql datenbank code erneuert (admin account hinzugefügt,
-preise von produkten von 10.4 zu 10.2 gestellt,
-pfaht der fotos in die datenbank einfegügt)
-Dokumentiert
+**Donnerstag (16:00 - 17:15):**
+- Weiterarbeit an der Registrierungsseite (PHP) (Überprüfung, ob PLZ bereits existiert, um Datenbankplatz zu sparen)
+- Weiterarbeit an der Homepage (PHP) (Fotos hinzugefügt)
+- Weiterarbeit am CSS-Stylesheet (Navigation nach oben und Footer nach unten verschoben)
+- Ordner mit Fotos hinzugefügt und alle Fotos umbenannt, um die Datenbankverwaltung zu erleichtern
+- MySQL-Datenbankcode aktualisiert (Admin-Account hinzugefügt, Produktpreise von 10.4 auf 10.2 geändert, Pfad der Fotos in die Datenbank eingefügt)
+- Dokumentiert
 
-Freitag (16:00 - 19:15)
-registrierung php seite weiterbearbeitet (checkt ob input admin daten sind und ob name und email schin exisitiert)
-bestellungformula php seite erstellt
-Dokumentiert
+**Freitag (16:00 - 20:15):**
+- Weiterarbeit an der Registrierungsseite (PHP) (Überprüfung, ob Admin-Daten eingegeben wurden und ob Name und E-Mail bereits existieren)
+- Bestellformular (PHP) erstellt
+- Dokumentiert
 
-Samstag (12:00 - 14:00)
-registrierung, bestellungformula php seiten weiterbearbeitet:
-    bestellungformula (checkt ob eingegeben von produkt id exisitiert und gleiche mit kunden id)
-    registrierung (checkt jetzt ob vor und nachname und email schin exisitiert und gleiche mit plz und ort)
-landing page html erstellt
+**Samstag (12:00 - 14:00):**
+- Weiterarbeit an Registrierungs- und Bestellformularseiten (PHP):
+    - Bestellformular (Überprüfung, ob Produkt-ID und Kunden-ID existieren)
+    - Registrierung (Überprüfung, ob Vorname, Nachname und E-Mail bereits existieren, sowie PLZ und Ort)
+- Landing Page (HTML) erstellt
 
+### Woche ab dem 12. Mai
 
+**Mittwoch (16:00 - 18:00):**
+- Weiterarbeit an Homepage und Bestellformularseiten (PHP)
+    - Homepage (Anzeige "keine Produkte gefunden", wenn keine Produkte in der Datenbank vorhanden sind)
+- Weiterarbeit am CSS-Stylesheet (Zentrierung von Div-Elementen)
+- Weiterarbeit an der Landing Page (HTML) (neues Layout)
 
+**Freitag (15:00 - 19:30):**
+- Weiterarbeit am Bestellformular (PHP) (Speichern-Button für mehrere Produkte hinzugefügt, Warenkorb-Funktion)
+- Produkt-Hinzufügen-Seite (PHP) erstellt
+- Verbesserte Benennung von Navigations- und Footer-Elementen
+- Dokumentiert
 
-woche ab 12 Mai
-Mittwoch (16:00 - 18:00)
-home, bestellungformula php seiten weiterbearbeitet
-    home (wenn es keine produkte in der datenbank gibt zeigt er "keine produkte gefunden" an)
-style css weiterbearbeitet (div centering)
-landing page html weiterbearbeitet (neues layout)
+### Woche ab dem 2. Juni
 
-Freitag (15:00 - 19:15)
-bestellungformula php seiten weiterbearbeitet (habe bei eingegeben produkt daten ein spechern button hinzu gefügt so das der user mehrere produkte bestellen kann (also wahren korp hinzu gefügt))
-produkt_hinzufügen php erstellt
-alle Navs und footer bessere namens gebung gemacht
-Dokumentiert
+**Montag (10:00 - 15:50):**
+- Weiterarbeit an Registrierungs- und Bestellformularseiten (PHP) (Debugging von Testfällen)
 
+**Dienstag:**
+- Dokumentiert
 
+### Woche ab dem 9. Juni
 
+**Montag (15:00 - 15:30):**
+- Weiterarbeit an der Registrierungsseite (PHP) (Debugging von Testfällen)
+- Dokumentiert
 
-woche ab 2.Juni
-Montag (10:00 - 12:00)
-registrierung, bestellungformula php seiten weiterbearbeitet (debugging von den test cases)
+### Woche ab dem 10. Juni
 
-Dienstag
-Dokumentiert
-
-
-
-
-woche ab 9.juni
-Montag (15:00 - 15:30)
-registrierung php seiten weiterbearbeitet (debugging von den test cases)
-Dokumentiert
-
-
-
-
-woche ab 10 Juni
-alle Navs und footer bessere namens gebung gemacht (link name zu profukt.php geänderd)
-landing page plazhalter text upgedatet und fotos hinzu gefügt
+**Montag (15:00 - 16:00):**
+- Verbesserte Benennung von Navigations- und Footer-Elementen (Link-Name zu produkt.php geändert)
+- Platzhaltertext auf der Landing Page aktualisiert und Fotos hinzugefügt
