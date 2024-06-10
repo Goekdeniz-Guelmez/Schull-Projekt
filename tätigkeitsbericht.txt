@@ -45,6 +45,7 @@ landing page html weiterbearbeitet (neues layout)
 Freitag (15:00 - 19:15)
 bestellungformula php seiten weiterbearbeitet (habe bei eingegeben produkt daten ein spechern button hinzu gefügt so das der user mehrere produkte bestellen kann (also wahren korp hinzu gefügt))
 produkt_hinzufügen php erstellt
+alle Navs und footer bessere namens gebung gemacht
 Dokumentiert
 
 
@@ -64,3 +65,4 @@ woche ab 9.juni
 Montag (15:00 - 15:30)
 registrierung php seiten weiterbearbeitet (debugging von den test cases)
 Dokumentiert
+
