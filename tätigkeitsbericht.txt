@@ -66,3 +66,9 @@ Montag (15:00 - 15:30)
 registrierung php seiten weiterbearbeitet (debugging von den test cases)
 Dokumentiert
 
+
+
+
+woche ab 10 Juni
+alle Navs und footer bessere namens gebung gemacht (link name zu profukt.php geänderd)
+landing page plazhalter text upgedatet und fotos hinzu gefügt
