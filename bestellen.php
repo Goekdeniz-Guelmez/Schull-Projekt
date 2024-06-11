@@ -97,7 +97,7 @@ function displayWarenkorb() {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    < class="navbar navbar-inverse">
+    <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="index.html">Smart GmbH</a>
@@ -115,7 +115,7 @@ function displayWarenkorb() {
                 </li>
             </ul>
         </div>
-    <>
+    </nav>
 
     <br>
     <br>
