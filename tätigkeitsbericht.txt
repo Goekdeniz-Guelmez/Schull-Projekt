@@ -63,3 +63,7 @@
 **Montag (15:00 - 16:00):**
 - Verbesserte Benennung von Navigations- und Footer-Elementen (Link-Name zu produkt.php geändert)
 - Platzhaltertext auf der Landing Page aktualisiert und Fotos hinzugefügt
+
+**Dienstag (12:00 - 12:45):**
+- Produkt einfügen Sete enfehrnt (braucht man nicht)
+- Bugg in registrierung gefixed bei ort check
