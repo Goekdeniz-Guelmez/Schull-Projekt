@@ -67,3 +67,4 @@
 **Dienstag (12:00 - 12:45):**
 - Produkt einfügen Sete enfehrnt (braucht man nicht)
 - Bugg in registrierung gefixed bei ort check
+- Admin account in sql code entfehrnt weil Produkt einfügen Sete ja auch nicht mehr gibt
