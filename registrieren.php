@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             try {
                 // Überprüfen, ob die eingegebene PLZ bereits in der Datenbank existiert
-                $sqlCheckPLZ = "SELECT PLZ FROM Ort WHERE PLZ = ?";
+                $sqlCheckPLZ = "SELECT PLZ FROM Ort WHERE PLZ = ?" or "SELECT Name FROM Ort WHERE PLZ = ?";
                 // Diese Methode bereitet eine SQL-Anweisung zur Ausführung vor. Sie schützt die Anwendung vor SQL-Injection-Angriffen, indem sie Platzhalter (?) in der SQL-Abfrage verwendet, die später mit den tatsächlichen Werten ersetzt werden.
                 $stmtCheckPLZ = $db->prepare($sqlCheckPLZ);
                 // Diese Methode bindet die tatsächlichen Werte an die Platzhalter in der vorbereiteten SQL-Anweisung. Sie nimmt die Datentypen und die entsprechenden Variablen als Parameter und sorgt dafür, dass die Werte richtig in die SQL-Anweisung eingefügt werden. Die Datentypen sind:
@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if ($resultCheckPLZ->num_rows === 0) {
                     $sqlInsertPLZ = "INSERT INTO Ort (PLZ, Name) VALUES (?, ?)";
                     $stmtInsertPLZ = $db->prepare($sqlInsertPLZ);
-                    $stmtAnschrift->bind_param("iss", $plz, $strasse, $hausnummer); // 'Ort', 'PLZ' und 'HausNr' in die Einfügeoperation einbinden
+                    $stmtInsertPLZ->bind_param("is", $plz, $ort); // 'Ort' und 'PLZ' in die Einfügeoperation einbinden
                     $stmtInsertPLZ->execute();
                 }
 
@@ -100,7 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="home.php">Home (Produkte)</a>
+                    <a href="home.php">Produkte</a>
                 </li>
                 <li class="active">
                     <a href="registrieren.php">Registrierung</a>
