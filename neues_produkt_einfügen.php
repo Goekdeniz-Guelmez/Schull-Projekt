@@ -109,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bezeichnung'])) {
 
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="home.php">Home (Produkte)</a>
+                    <a href="home.php">Produkte</a>
                 </li>
                 <li class="active">
                     <a href="registrieren.php">Registrierung</a>

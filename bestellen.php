@@ -105,7 +105,7 @@ function displayWarenkorb() {
 
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="home.php">Home (Produkte)</a>
+                    <a href="home.php">Produkte</a>
                 </li>
                 <li>
                     <a href="registrieren.php">Registrierung</a>
