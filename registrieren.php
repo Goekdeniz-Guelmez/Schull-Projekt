@@ -50,18 +50,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
 
                 // Anschrift in die Datenbank einfügen
-                $sqlAnschrift = "INSERT INTO Anschrift (PLZ, Straße, Hausnummer) VALUES (?, ?, ?)";
+                $sqlAnschrift = "INSERT INTO Anschrift (PLZ, Name, Straße, Hausnummer) VALUES (?, ?, ?, ?)";
                 $stmtAnschrift = $db->prepare($sqlAnschrift);
-                $stmtAnschrift->bind_param("iss", $plz, $strasse, $hausnummer);
+                $stmtAnschrift->bind_param("issi", $plz, $ort, $strasse, $hausnummer);
                 $stmtAnschrift->execute();
-                $anschriftId = $db->insert_id; // Die ID der eingefügten Anschrift speichern
+                $anschriftId = $db->insert_id;
 
                 // Kundendaten in die Datenbank einfügen
                 $sqlKunde = "INSERT INTO Kunde (Vorname, Nachname, AnsID, Email) VALUES (?, ?, ?, ?)";
                 $stmtKunde = $db->prepare($sqlKunde);
                 $stmtKunde->bind_param("ssis", $vorname, $nachname, $anschriftId, $email);
                 $stmtKunde->execute();
-                $kundennummer = $db->insert_id; // Die Kundennummer speichern
+                $kundennummer = $db->insert_id;
 
                 // Alle Änderungen in der Datenbank festschreiben
                 $db->commit();
