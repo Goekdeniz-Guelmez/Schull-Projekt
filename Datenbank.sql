@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS Ort (
 CREATE TABLE IF NOT EXISTS Anschrift (
     AnsID int(11) NOT NULL AUTO_INCREMENT,
     PLZ int(11),
+    Name varchar(100) NOT NULL,
     Straße varchar(100) NOT NULL,
     Hausnummer int(11) NOT NULL,
     PRIMARY KEY (AnsID),
