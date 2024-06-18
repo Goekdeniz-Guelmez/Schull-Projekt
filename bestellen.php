@@ -92,6 +92,10 @@ function displayWarenkorb() {
             <?php if ($productNotFound) { ?>
             alert("Produkt nicht gefunden.");
             <?php } ?>
+            
+            <?php if ($negativeQuantityError) { ?>
+            alert("Menge darf nicht negativ sein.");
+            <?php } ?>
         };
     </script>
     <link rel="stylesheet" href="style.css">
